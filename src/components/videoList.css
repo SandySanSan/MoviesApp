@@ -1,0 +1,9 @@
+.hoverableRow {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.hoverableRow:hover {
+  background-color: whitesmoke;
+  transition-duration: 0.5s;
+}

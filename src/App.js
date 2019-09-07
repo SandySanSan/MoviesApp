@@ -3,12 +3,11 @@ import VideoList from "./components/VideoList";
 import axios from "axios";
 import Header from "./components/Header";
 import { Layout, Breadcrumb } from "antd";
-import Sidebar from "./components/Sidebar";
 
 const API_KEY = process.env.REACT_APP_MOVIES_API_KEY;
 const API_END_PONT = "https://api.themoviedb.org/3/";
 const POPULAR_MOVIES_URL =
-  "discover/movie?language=fr&sort_by=popularity.desc&include_adult=false&api_key=";
+  "discover/movie?language=en&sort_by=popularity.desc&include_adult=false&api_key=";
 const URL = `${API_END_PONT}${POPULAR_MOVIES_URL}${API_KEY}`;
 
 class App extends Component {
@@ -40,6 +39,10 @@ class App extends Component {
       .then(resp => this.setState({ youtubeKey: resp.data.videos.results[0].key }));
   }
 
+  handleClickCurrent = movie => {
+    this.setState({ currentMovie: movie }, () => this.getVideo());
+  };
+
   render() {
     const { Content } = Layout;
     const { movies, currentMovie, youtubeKey } = this.state;
@@ -60,10 +63,14 @@ class App extends Component {
                 margin: 0,
                 minHeight: 280
               }}>
-              <VideoList movies={movies} currentMovie={currentMovie} youtubeKey={youtubeKey} />
+              <VideoList
+                movies={movies}
+                currentMovie={currentMovie}
+                youtubeKey={youtubeKey}
+                handleClickCurrent={this.handleClickCurrent}
+              />
             </Content>
           </Layout>
-          <Sidebar />
         </Layout>
       </Layout>
     );

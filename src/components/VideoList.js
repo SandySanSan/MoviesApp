@@ -1,26 +1,29 @@
 import React from "react";
-import { Card, Typography } from "antd";
+import { Typography, Row, Col } from "antd";
 import VideoDetails from "./VideoDetails";
+import "./videoList.css";
+const { Title } = Typography;
 
-const VideoList = ({ movies, currentMovie, youtubeKey }) => {
-  const { Title } = Typography;
-  const gridStyle = {
-    width: "20%",
-    textAlign: "center"
-  };
+const VideoList = ({ movies, currentMovie, youtubeKey, handleClickCurrent }) => {
   return (
-    <Card title={<Title level={3}>FILMS POPULAIRES</Title>}>
-      <VideoDetails currentMovie={currentMovie} youtubeKey={youtubeKey} />
-      {movies.map(item => (
-        <Card.Grid style={gridStyle} key={item.id}>
-          <Card
-            type='inner'
-            cover={
-              <img alt='example' src={`https://image.tmdb.org/t/p/w185${item.poster_path}`} />
-            }></Card>
-        </Card.Grid>
-      ))}
-    </Card>
+    <Row gutter={16}>
+      <Title level={3}>MOST POPULAR MOVIES</Title>
+      <Col span={15}>
+        <VideoDetails currentMovie={currentMovie} youtubeKey={youtubeKey} />
+      </Col>
+      <Col span={9}>
+        {movies.map(item => (
+          <Row className='hoverableRow' onClick={() => handleClickCurrent(item)}>
+            <Col span={4}>
+              <img alt={item.title} src={`https://image.tmdb.org/t/p/w92${item.poster_path}`} />
+            </Col>
+            <Col>
+              <Title level={4}>{item.title}</Title>
+            </Col>
+          </Row>
+        ))}
+      </Col>
+    </Row>
   );
 };
 
