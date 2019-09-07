@@ -1,10 +1,13 @@
 import React from "react";
-import { Typography, Row, Col } from "antd";
+import { Typography, Row, Col, Rate } from "antd";
 import VideoDetails from "./VideoDetails";
 import "./videoList.css";
 const { Title } = Typography;
 
 const VideoList = ({ movies, currentMovie, youtubeKey, handleClickCurrent }) => {
+  const computeStars = average => {
+    return Math.round(average / 2, 1);
+  };
   return (
     <Row gutter={16}>
       <Title level={3}>MOST POPULAR MOVIES</Title>
@@ -19,6 +22,7 @@ const VideoList = ({ movies, currentMovie, youtubeKey, handleClickCurrent }) => 
             </Col>
             <Col>
               <Title level={4}>{item.title}</Title>
+              <Rate disabled allowHalf defaultValue={computeStars(item.vote_average)} />
             </Col>
           </Row>
         ))}
