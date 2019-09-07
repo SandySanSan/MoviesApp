@@ -2,9 +2,18 @@ import React, { Component } from "react";
 import { Input } from "antd";
 
 class SearchBar extends Component {
-  state = {};
+  state = { searchText: "" };
+
+  handleChange = e => {
+    const searchText = e.target.value;
+    this.setState({ searchText });
+  };
+
   render() {
-    return <Input placeholder='Recherche' />;
+    const { Search } = Input;
+
+    const { searchText } = this.state;
+    return <Search placeholder='Recherche' onChange={this.handleChange} value={searchText} />;
   }
 }
 
