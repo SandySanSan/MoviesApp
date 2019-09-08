@@ -16,7 +16,10 @@ const VideoList = ({ movies, currentMovie, youtubeKey, handleClickCurrent }) => 
       </Col>
       <Col span={9}>
         {movies.map(item => (
-          <Row className='hoverableRow' onClick={() => handleClickCurrent(item)}>
+          <Row
+            className='hoverableRow'
+            onClick={() => handleClickCurrent(item)}
+            key={item.poster_path}>
             <Col span={4}>
               <img alt={item.title} src={`https://image.tmdb.org/t/p/w92${item.poster_path}`} />
             </Col>

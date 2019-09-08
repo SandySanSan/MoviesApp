@@ -9,6 +9,7 @@ const API_END_PONT = "https://api.themoviedb.org/3/";
 const POPULAR_MOVIES_URL =
   "discover/movie?language=en&sort_by=popularity.desc&include_adult=false&api_key=";
 const URL = `${API_END_PONT}${POPULAR_MOVIES_URL}${API_KEY}`;
+const SEARCH_URL = "search/movie?";
 
 class App extends Component {
   state = { movies: [], currentMovie: [], youtubeKey: "" };
@@ -31,11 +32,8 @@ class App extends Component {
 
   getVideo() {
     const { currentMovie } = this.state;
-
     axios
-      .get(
-        `https://api.themoviedb.org/3/movie/${currentMovie.id}?api_key=${API_KEY}&append_to_response=videos`
-      )
+      .get(`${API_END_PONT}${currentMovie.id}?api_key=${API_KEY}&append_to_response=videos`)
       .then(resp => this.setState({ youtubeKey: resp.data.videos.results[0].key }));
   }
 
@@ -43,12 +41,23 @@ class App extends Component {
     this.setState({ currentMovie: movie }, () => this.getVideo());
   };
 
+  searchVideo = searchText => {
+    console.log(searchText);
+    if (searchText) {
+      axios.get(`${API_END_PONT}${SEARCH_URL}api_key=${API_KEY}&query=${searchText}`).then(resp => {
+        if (resp.data && resp.data.results[0]) {
+          this.setState({ currentMovie: resp.data.results[0] }, () => this.getVideo());
+        }
+      });
+    }
+  };
+
   render() {
     const { Content } = Layout;
     const { movies, currentMovie, youtubeKey } = this.state;
     return (
       <Layout>
-        <Header />
+        <Header searchVideo={this.searchVideo} />
         <Layout>
           <Layout style={{ padding: "0 24px 24px" }}>
             <Breadcrumb style={{ margin: "16px 0" }}>

@@ -11,9 +11,18 @@ class SearchBar extends Component {
 
   render() {
     const { Search } = Input;
-
+    const { searchVideo } = this.props;
     const { searchText } = this.state;
-    return <Search placeholder='Recherche' onChange={this.handleChange} value={searchText} />;
+
+    return (
+      <Search
+        placeholder='Search movies, people ...'
+        onChange={this.handleChange}
+        value={searchText}
+        onSearch={() => searchVideo(searchText)}
+        enterButton
+      />
+    );
   }
 }
 
