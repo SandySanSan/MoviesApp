@@ -4,7 +4,15 @@ import VideoDetails from "./VideoDetails";
 import "./videoList.css";
 const { Title } = Typography;
 
-const VideoList = ({ movies, currentMovie, youtubeKey, handleClickCurrent, searchVideo }) => {
+const VideoList = ({
+  movies,
+  currentMovie,
+  youtubeKey,
+  handleClickCurrent,
+  searchVideo,
+  credits,
+  getCredits
+}) => {
   const computeStars = average => {
     return Math.round(average / 2, 1);
   };
@@ -15,6 +23,8 @@ const VideoList = ({ movies, currentMovie, youtubeKey, handleClickCurrent, searc
           currentMovie={currentMovie}
           youtubeKey={youtubeKey}
           searchVideo={searchVideo}
+          credits={credits}
+          getCredits={getCredits}
         />
       </Col>
       <Col span={9}>

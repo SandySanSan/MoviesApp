@@ -2,16 +2,24 @@ import React from "react";
 import { Typography, Row, Rate } from "antd";
 const { Title } = Typography;
 
-const VideoDetails = ({ currentMovie, youtubeKey }) => {
+const VideoDetails = ({ currentMovie, youtubeKey, credits, getCredits }) => {
   const BASE_URL = "https://www.youtube.com/embed/";
 
-  async function computeStars(average) {
-    return Math.round(average / 5, 2);
+  function computeStars(average) {
+    return Math.round(average / 5);
   }
 
   const currentMovieStyle = {
     padding: "10px"
   };
+
+  const actorsList =
+    currentMovie.credits &&
+    currentMovie.credits.map(actor => (
+      <div>
+        {actor.name} ({actor.character})
+      </div>
+    ));
 
   return (
     <Row style={currentMovieStyle}>
@@ -30,6 +38,7 @@ const VideoDetails = ({ currentMovie, youtubeKey }) => {
         defaultValue={currentMovie.vote_average && computeStars(currentMovie.vote_average)}
       />
       <p>{currentMovie.overview}</p>
+      <p>{actorsList}</p>
     </Row>
   );
 };
