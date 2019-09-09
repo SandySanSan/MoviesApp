@@ -83,16 +83,35 @@ const withApiMovie = WrappedComponent =>
         );
     };
 
-    async getCredits() {
+    getCredits() {
       const { currentMovie } = this.state;
       if (currentMovie.id) {
         axios
-          .get(`https://api.themoviedb.org/3/movie/${currentMovie.id}/credits?api_key=${API_KEY}`)
+          .get(`${API_END_POINT}movie/${currentMovie.id}/credits?api_key=${API_KEY}`)
+          .then(resp =>
+            this.setState(
+              {
+                currentMovie: {
+                  ...currentMovie,
+                  credits: resp.data.cast
+                }
+              },
+              () => this.getKeywords()
+            )
+          );
+      }
+    }
+
+    getKeywords() {
+      const { currentMovie } = this.state;
+      if (currentMovie.id) {
+        axios
+          .get(`${API_END_POINT}movie/${currentMovie.id}/keywords?api_key=${API_KEY}`)
           .then(resp =>
             this.setState({
               currentMovie: {
                 ...currentMovie,
-                credits: resp.data.cast
+                keywords: resp.data.keywords
               }
             })
           );

@@ -18,7 +18,7 @@ const VideoList = ({
   };
   return (
     <Row gutter={16}>
-      <Col span={15}>
+      <Col span={16}>
         <VideoDetails
           currentMovie={currentMovie}
           youtubeKey={youtubeKey}
@@ -27,13 +27,13 @@ const VideoList = ({
           getCredits={getCredits}
         />
       </Col>
-      <Col span={9}>
+      <Col span={8}>
         {movies.map(item => (
           <Row
             className='hoverableRow'
             onClick={() => handleClickCurrent(item)}
             key={item.poster_path}>
-            <Col span={4}>
+            <Col span={5}>
               <img alt={item.title} src={`https://image.tmdb.org/t/p/w92${item.poster_path}`} />
             </Col>
             <Col>
