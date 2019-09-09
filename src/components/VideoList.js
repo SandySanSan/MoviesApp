@@ -4,15 +4,18 @@ import VideoDetails from "./VideoDetails";
 import "./videoList.css";
 const { Title } = Typography;
 
-const VideoList = ({ movies, currentMovie, youtubeKey, handleClickCurrent }) => {
+const VideoList = ({ movies, currentMovie, youtubeKey, handleClickCurrent, searchVideo }) => {
   const computeStars = average => {
     return Math.round(average / 2, 1);
   };
   return (
     <Row gutter={16}>
-      <Title level={3}>MOST POPULAR MOVIES</Title>
       <Col span={15}>
-        <VideoDetails currentMovie={currentMovie} youtubeKey={youtubeKey} />
+        <VideoDetails
+          currentMovie={currentMovie}
+          youtubeKey={youtubeKey}
+          searchVideo={searchVideo}
+        />
       </Col>
       <Col span={9}>
         {movies.map(item => (
@@ -24,7 +27,9 @@ const VideoList = ({ movies, currentMovie, youtubeKey, handleClickCurrent }) => 
               <img alt={item.title} src={`https://image.tmdb.org/t/p/w92${item.poster_path}`} />
             </Col>
             <Col>
-              <Title level={4}>{item.title}</Title>
+              <Title level={4}>
+                {item.title} ({item.release_date.slice(0, 4)})
+              </Title>
               <Rate disabled allowHalf defaultValue={computeStars(item.vote_average)} />
             </Col>
           </Row>

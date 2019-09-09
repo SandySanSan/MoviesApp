@@ -1,9 +1,14 @@
 import React from "react";
-import { Typography, Row } from "antd";
+import { Typography, Row, Rate } from "antd";
 const { Title } = Typography;
 
 const VideoDetails = ({ currentMovie, youtubeKey }) => {
   const BASE_URL = "https://www.youtube.com/embed/";
+
+  async function computeStars(average) {
+    return Math.round(average / 5, 2);
+  }
+
   const currentMovieStyle = {
     padding: "10px"
   };
@@ -16,7 +21,14 @@ const VideoDetails = ({ currentMovie, youtubeKey }) => {
         autoPlay={false}
         title='video'
         src={`${BASE_URL}${youtubeKey}`}></iframe>
-      <Title level={3}>{currentMovie.title}</Title>
+      <Title level={3}>
+        {currentMovie.title} ({currentMovie.release_date})
+      </Title>
+      <Rate
+        disabled
+        allowHalf
+        defaultValue={currentMovie.vote_average && computeStars(currentMovie.vote_average)}
+      />
       <p>{currentMovie.overview}</p>
     </Row>
   );

@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { Input } from "antd";
+import React, { Component, Fragment } from "react";
+import { Input, Button } from "antd";
 
 class SearchBar extends Component {
   state = { searchText: "" };
@@ -10,18 +10,21 @@ class SearchBar extends Component {
   };
 
   render() {
-    const { Search } = Input;
     const { searchVideo } = this.props;
     const { searchText } = this.state;
 
     return (
-      <Search
-        placeholder='Search movies, people ...'
-        onChange={this.handleChange}
-        value={searchText}
-        onSearch={() => searchVideo(searchText)}
-        enterButton
-      />
+      <Fragment>
+        <Input
+          placeholder='Search movies, people ...'
+          onChange={this.handleChange}
+          value={searchText}
+          size='large'
+        />
+        <Button size='large' onClick={() => searchVideo(searchText)}>
+          Search
+        </Button>
+      </Fragment>
     );
   }
 }
