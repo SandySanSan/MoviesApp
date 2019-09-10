@@ -10,11 +10,11 @@ const SEARCH_URL = "search/movie?";
 
 const withApiMovie = WrappedComponent =>
   class HOC extends Component {
-    state = { movies: [], currentMovie: [], youtubeKey: "", latestMovies: [] };
+    state = { movies: [], currentMovie: [], youtubeKey: "", nowPlaying: [] };
 
     componentDidMount() {
       this.initMovies();
-      this.initLastestMovies();
+      this.nowPlayingMovies();
     }
 
     initMovies = () => {
@@ -34,10 +34,10 @@ const withApiMovie = WrappedComponent =>
       );
     };
 
-    initLastestMovies() {
+    nowPlayingMovies() {
       axios
         .get(`${API_END_POINT}movie/now_playing?api_key=${API_KEY}&language=en-US`)
-        .then(resp => this.setState({ latestMovies: resp.data.results.slice(0, 6) }));
+        .then(resp => this.setState({ nowPlaying: resp.data.results.slice(0, 6) }));
     }
 
     getVideo() {
@@ -119,7 +119,7 @@ const withApiMovie = WrappedComponent =>
     }
 
     render() {
-      const { movies, currentMovie, youtubeKey, latestMovies } = this.state;
+      const { movies, currentMovie, youtubeKey, nowPlaying } = this.state;
 
       return (
         <WrappedComponent
@@ -128,7 +128,7 @@ const withApiMovie = WrappedComponent =>
           youtubeKey={youtubeKey}
           handleClickCurrent={this.handleClickCurrent}
           searchVideo={this.searchVideo}
-          latestMovies={latestMovies}
+          nowPlaying={nowPlaying}
           getCredits={this.getCredits}
           {...this.props}
         />

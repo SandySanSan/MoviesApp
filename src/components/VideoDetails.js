@@ -27,8 +27,8 @@ const VideoDetails = ({ currentMovie, youtubeKey }) => {
 
   const data =
     currentMovie.credits &&
-    currentMovie.credits.map(actor => ({
-      key: "1",
+    currentMovie.credits.map((actor, index) => ({
+      key: `${index}`,
       name: `${actor.name}`,
       character: `${actor.character}`
     }));
@@ -55,7 +55,9 @@ const VideoDetails = ({ currentMovie, youtubeKey }) => {
       <div style={{ padding: "0 0 30px 0" }}>
         {currentMovie.keywords &&
           currentMovie.keywords.map(keyword => (
-            <Tag style={{ marginBottom: "8px" }}>{keyword.name}</Tag>
+            <Tag key={keyword.name} style={{ marginBottom: "8px" }}>
+              {keyword.name}
+            </Tag>
           ))}
       </div>
 

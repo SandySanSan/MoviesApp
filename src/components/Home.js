@@ -9,7 +9,7 @@ const Home = ({
   movies,
   currentMovie,
   youtubeKey,
-  latestMovies,
+  nowPlaying,
   handleClickCurrent,
   searchVideo,
   getCredits
@@ -27,7 +27,6 @@ const Home = ({
               margin: 0,
               minHeight: 280
             }}>
-            <LatestMovies latestMovies={latestMovies} handleClickCurrent={handleClickCurrent} />
             <VideoList
               movies={movies}
               currentMovie={currentMovie}
@@ -36,6 +35,7 @@ const Home = ({
               searchVideo={searchVideo}
               getCredits={getCredits}
             />
+            <LatestMovies nowPlaying={nowPlaying} handleClickCurrent={handleClickCurrent} />
           </Content>
         </Layout>
       </Layout>
