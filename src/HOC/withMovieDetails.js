@@ -14,34 +14,42 @@ const withMovieDetails = WrappedComponent =>
 
     componentDidMount() {
       this.getCurrentMovie();
-      this.getVideo();
-      this.setRecommendations();
     }
 
     getCurrentMovie() {
       const id = this.props.match.params.id;
       axios
         .get(`${API_END_POINT}movie/${id}?api_key=${API_KEY}&language=en-US`)
-        .then(resp => this.setState({ currentMovie: resp.data }));
+        .then(resp => this.setState({ currentMovie: resp.data }, () => this.getVideo()));
     }
 
     getVideo() {
-      const id = this.props.match.params.id;
-      axios
-        .get(`${API_END_POINT}movie/${id}?api_key=${API_KEY}&append_to_response=videos`)
-        .then(resp => this.setState({ youtubeKey: resp.data.videos.results[0].key }));
+      const { currentMovie } = this.state;
+      if (currentMovie.id) {
+        axios
+          .get(
+            `${API_END_POINT}movie/${currentMovie.id}?api_key=${API_KEY}&append_to_response=videos`
+          )
+          .then(resp =>
+            this.setState({ youtubeKey: resp.data.videos.results[0].key }, () =>
+              this.setRecommendations()
+            )
+          );
+      }
     }
 
     setRecommendations = () => {
-      const id = this.props.match.params.id;
-      axios.get(`${API_END_POINT}movie/${id}/recommendations?api_key=${API_KEY}`).then(resp =>
-        this.setState(
-          {
-            recoMovies: resp.data.results.slice(0, 5)
-          },
-          () => this.getCredits()
-        )
-      );
+      const { currentMovie } = this.state;
+      axios
+        .get(`${API_END_POINT}movie/${currentMovie.id}/recommendations?api_key=${API_KEY}`)
+        .then(resp =>
+          this.setState(
+            {
+              recoMovies: resp.data.results.slice(0, 5)
+            },
+            () => this.getCredits()
+          )
+        );
     };
 
     getCredits() {
@@ -80,9 +88,8 @@ const withMovieDetails = WrappedComponent =>
 
     handleClickCurrent = movie => {
       this.setState({ currentMovie: movie }, () => {
-        this.getVideo();
         this.setRecommendations();
-        this.getCredits();
+        this.getVideo();
       });
     };
 
