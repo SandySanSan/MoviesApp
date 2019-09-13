@@ -1,13 +1,11 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { List, Pagination, Icon, Row, Col, Layout, Typography } from "antd";
-import Header from "./components/Header";
+import { List, Pagination, Icon, Row, Col, Layout } from "antd";
+import Header from "./Header";
 
 const API_KEY = process.env.REACT_APP_MOVIES_API_KEY;
 const API_END_POINT = "https://api.themoviedb.org/3/";
 const ALL_MOVIES_URL = "discover/movie?";
-
-const { Title } = Typography;
 
 class AllMoviesList extends Component {
   state = { allMovies: [], current: 1, totalResults: "" };

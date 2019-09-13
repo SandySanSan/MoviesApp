@@ -5,7 +5,7 @@ import "./videoList.css";
 const { Title } = Typography;
 
 const VideoList = ({
-  popularMovies,
+  recoMovies,
   currentMovie,
   youtubeKey,
   handleClickCurrent,
@@ -28,7 +28,7 @@ const VideoList = ({
         />
       </Col>
       <Col span={8}>
-        {popularMovies.map(item => (
+        {recoMovies.map(item => (
           <Row
             className='hoverableRow'
             onClick={() => handleClickCurrent(item)}

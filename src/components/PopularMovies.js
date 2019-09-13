@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
-import { Carousel, Typography, Tag } from "antd";
+import { Carousel, Typography, Button } from "antd";
 import "./carousel.css";
-const { Title } = Typography;
+const { Title, Paragraph } = Typography;
 
 const PopularMovies = ({ popularMovies }) => (
   <Fragment>
@@ -19,7 +19,10 @@ const PopularMovies = ({ popularMovies }) => (
             </div>
             <div className='text-block'>
               <Title>{movie.title}</Title>
-              <p>{movie.overview}</p>
+              <Paragraph ellipsis={{ rows: 3, expandable: false }}>{movie.overview}</Paragraph>
+              <Button>
+                <a href={`/movie-details/${movie.id}`}>More details</a>
+              </Button>
             </div>
           </div>
         </Fragment>

@@ -1,20 +1,11 @@
 import React from "react";
-import VideoList from "./VideoList";
 import Header from "./Header";
 import { Layout } from "antd";
 import withApiMovie from "../HOC/withApiMovie";
 import LatestMovies from "./LatestMovies";
 import PopularMovies from "./PopularMovies";
 
-const Home = ({
-  popularMovies,
-  currentMovie,
-  youtubeKey,
-  nowPlaying,
-  handleClickCurrent,
-  searchVideo,
-  getCredits
-}) => {
+const Home = ({ popularMovies, nowPlaying, handleClickCurrent, searchVideo }) => {
   const { Content } = Layout;
   return (
     <Layout>
@@ -29,15 +20,7 @@ const Home = ({
               minHeight: 280
             }}>
             <PopularMovies popularMovies={popularMovies} />
-            <LatestMovies nowPlaying={nowPlaying} handleClickCurrent={handleClickCurrent} />
-            <VideoList
-              popularMovies={popularMovies}
-              currentMovie={currentMovie}
-              youtubeKey={youtubeKey}
-              handleClickCurrent={handleClickCurrent}
-              searchVideo={searchVideo}
-              getCredits={getCredits}
-            />
+            <LatestMovies nowPlaying={nowPlaying} />
           </Content>
         </Layout>
       </Layout>

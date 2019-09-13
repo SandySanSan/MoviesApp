@@ -1,5 +1,7 @@
 import React from "react";
 import { Typography, Row, Rate, Tabs, Icon, Table, Tag } from "antd";
+import "./videoList.css";
+
 const { Title } = Typography;
 const { TabPane } = Tabs;
 
