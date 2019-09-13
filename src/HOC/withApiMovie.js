@@ -10,20 +10,20 @@ const SEARCH_URL = "search/movie?";
 
 const withApiMovie = WrappedComponent =>
   class HOC extends Component {
-    state = { movies: [], currentMovie: [], youtubeKey: "", nowPlaying: [] };
+    state = { popularMovies: [], currentMovie: [], youtubeKey: "", nowPlaying: [] };
 
     componentDidMount() {
-      this.initMovies();
-      this.nowPlayingMovies();
+      this.initPopularMovies();
+      this.InitNowPlayingMovies();
     }
 
-    initMovies = () => {
+    initPopularMovies = () => {
       axios.get(URL).then(
         resp =>
           resp.data &&
           this.setState(
             {
-              movies: resp.data.results.slice(1, 6),
+              popularMovies: resp.data.results.slice(1, 6),
               currentMovie: resp.data.results[0]
             },
             () => {
@@ -34,7 +34,7 @@ const withApiMovie = WrappedComponent =>
       );
     };
 
-    nowPlayingMovies() {
+    InitNowPlayingMovies() {
       axios
         .get(`${API_END_POINT}movie/now_playing?api_key=${API_KEY}&language=en-US`)
         .then(resp => this.setState({ nowPlaying: resp.data.results.slice(0, 6) }));
@@ -78,7 +78,7 @@ const withApiMovie = WrappedComponent =>
         .get(`${API_END_POINT}movie/${currentMovie.id}/recommendations?api_key=${API_KEY}`)
         .then(resp =>
           this.setState({
-            movies: resp.data.results.slice(0, 5)
+            popularMovies: resp.data.results.slice(0, 5)
           })
         );
     };
@@ -119,11 +119,11 @@ const withApiMovie = WrappedComponent =>
     }
 
     render() {
-      const { movies, currentMovie, youtubeKey, nowPlaying } = this.state;
+      const { popularMovies, currentMovie, youtubeKey, nowPlaying } = this.state;
 
       return (
         <WrappedComponent
-          movies={movies}
+          popularMovies={popularMovies}
           currentMovie={currentMovie}
           youtubeKey={youtubeKey}
           handleClickCurrent={this.handleClickCurrent}
