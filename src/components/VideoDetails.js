@@ -1,18 +1,13 @@
 import React from "react";
 import { Typography, Row, Rate, Tabs, Icon, Table, Tag } from "antd";
+import "./videoList.css";
+
 const { Title } = Typography;
 const { TabPane } = Tabs;
 
 const VideoDetails = ({ currentMovie, youtubeKey }) => {
   const BASE_URL = "https://www.youtube.com/embed/";
-
-  function computeStars(average) {
-    return Math.round(average / 5);
-  }
-
-  const currentMovieStyle = {
-    padding: "10px"
-  };
+  const computeStars = average => Math.round(average / 2, 1);
 
   const columns = [
     {
@@ -34,7 +29,7 @@ const VideoDetails = ({ currentMovie, youtubeKey }) => {
     }));
 
   return (
-    <Row style={currentMovieStyle}>
+    <Row style={{ padding: "10px" }}>
       <iframe
         width='100%'
         height='600px'
@@ -42,14 +37,10 @@ const VideoDetails = ({ currentMovie, youtubeKey }) => {
         title='video'
         src={`${BASE_URL}${youtubeKey}`}
       />
-      <Title level={2}>
-        {currentMovie.title} ({currentMovie.release_date})
+      <Title level={2} style={{ paddingTop: "10px" }}>
+        {currentMovie.title} ({currentMovie.release_date && currentMovie.release_date.slice(0, 4)})
       </Title>
-      <Rate
-        disabled
-        allowHalf
-        defaultValue={currentMovie.vote_average && computeStars(currentMovie.vote_average)}
-      />
+      <Rate disabled allowHalf value={currentMovie && computeStars(currentMovie.vote_average)} />
       <p style={{ padding: "20px 0 30px 0" }}>{currentMovie.overview}</p>
       <p>Keywords :</p>
       <div style={{ padding: "0 0 30px 0" }}>
