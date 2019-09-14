@@ -20,7 +20,7 @@ const ResultsList = ({ searchresults, text }) => {
             <Card title={`${searchresults.total_results} results for "${text}" `}>
               {searchresults.results &&
                 resultsList.map(result => (
-                  <Card.Grid style={gridStyle}>
+                  <Card.Grid style={gridStyle} key={`${result.title}${result.poster_path}`}>
                     <Link to={`/movie-details/${result.id}`}>
                       <div>
                         {result.poster_path ? (
