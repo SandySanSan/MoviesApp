@@ -75,17 +75,18 @@ const withMovieDetails = WrappedComponent =>
 
     getKeywords() {
       const { currentMovie } = this.state;
-      const id = this.props.match.params.id;
 
-      if (id) {
-        axios.get(`${API_END_POINT}movie/${id}/keywords?api_key=${API_KEY}`).then(resp =>
-          this.setState({
-            currentMovie: {
-              ...currentMovie,
-              keywords: resp.data.keywords
-            }
-          })
-        );
+      if (currentMovie.id) {
+        axios
+          .get(`${API_END_POINT}movie/${currentMovie.id}/keywords?api_key=${API_KEY}`)
+          .then(resp =>
+            this.setState({
+              currentMovie: {
+                ...currentMovie,
+                keywords: resp.data.keywords
+              }
+            })
+          );
       }
     }
 

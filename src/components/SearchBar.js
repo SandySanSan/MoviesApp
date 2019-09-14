@@ -32,7 +32,6 @@ class SearchBar extends Component {
           value={searchText}
           onSearch={this.renderRedirect}
         />
-        {/* <Button onClick={this.setRedirect}>Search</Button> */}
       </Fragment>
     );
   }

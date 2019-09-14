@@ -7,7 +7,7 @@ const PopularMovies = ({ popularMovies }) => (
   <Fragment>
     <Carousel autoplay effect='fade'>
       {popularMovies.map(movie => (
-        <Fragment>
+        <Fragment key={movie.poster_path}>
           <div className='carousel-container'>
             <img
               src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}

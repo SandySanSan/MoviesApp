@@ -22,7 +22,7 @@ class SearchResults extends Component {
     if (text) {
       axios.get(`${API_END_POINT}${SEARCH_URL}api_key=${API_KEY}&query=${text}`).then(resp => {
         if (resp.data.results) {
-          this.setState({ searchresults: resp.data.results });
+          this.setState({ searchresults: resp.data });
         }
       });
     }
