@@ -1,5 +1,8 @@
 import React, { Component, Fragment } from "react";
-import { Input, Button } from "antd";
+import { Input } from "antd";
+import { withRouter } from "react-router-dom";
+
+const { Search } = Input;
 
 class SearchBar extends Component {
   state = { searchText: "" };
@@ -9,24 +12,30 @@ class SearchBar extends Component {
     this.setState({ searchText });
   };
 
+  renderRedirect = () => {
+    let { history } = this.props;
+
+    this.state.searchText !== "" &&
+      history.push({
+        pathname: `/search-results/${this.state.searchText}`
+      });
+  };
+
   render() {
-    const { searchVideo } = this.props;
     const { searchText } = this.state;
 
     return (
       <Fragment>
-        <Input
+        <Search
           placeholder='Search movies, people ...'
           onChange={this.handleChange}
           value={searchText}
-          size='large'
+          onSearch={this.renderRedirect}
         />
-        <Button size='large' onClick={() => searchVideo(searchText)}>
-          Search
-        </Button>
+        {/* <Button onClick={this.setRedirect}>Search</Button> */}
       </Fragment>
     );
   }
 }
 
-export default SearchBar;
+export default withRouter(SearchBar);

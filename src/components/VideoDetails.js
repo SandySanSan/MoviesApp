@@ -30,13 +30,17 @@ const VideoDetails = ({ currentMovie, youtubeKey }) => {
 
   return (
     <Row style={{ padding: "10px" }}>
-      <iframe
-        width='100%'
-        height='600px'
-        autoPlay={false}
-        title='video'
-        src={`${BASE_URL}${youtubeKey}`}
-      />
+      {youtubeKey !== "" ? (
+        <iframe
+          width='100%'
+          height='600px'
+          autoPlay={false}
+          title='video'
+          src={`${BASE_URL}${youtubeKey}`}
+        />
+      ) : (
+        <img src={`http://image.tmdb.org/t/p/w500${currentMovie.poster_path}`} />
+      )}
       <Title level={2} style={{ paddingTop: "10px" }}>
         {currentMovie.title} ({currentMovie.release_date && currentMovie.release_date.slice(0, 4)})
       </Title>
