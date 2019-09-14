@@ -5,7 +5,7 @@ import withApiMovie from "../HOC/withApiMovie";
 import LatestMovies from "./LatestMovies";
 import PopularMovies from "./PopularMovies";
 
-const Home = ({ popularMovies, nowPlaying, handleClickCurrent, searchVideo }) => {
+const Home = ({ popularMovies, nowPlaying, searchVideo }) => {
   const { Content } = Layout;
   return (
     <Layout>

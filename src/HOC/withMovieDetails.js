@@ -30,10 +30,12 @@ const withMovieDetails = WrappedComponent =>
           .get(
             `${API_END_POINT}movie/${currentMovie.id}?api_key=${API_KEY}&append_to_response=videos`
           )
-          .then(resp =>
-            this.setState({ youtubeKey: resp.data.videos.results[0].key }, () =>
-              this.setRecommendations()
-            )
+          .then(
+            resp =>
+              resp.data.videos.results[0] &&
+              this.setState({ youtubeKey: resp.data.videos.results[0].key }, () =>
+                this.setRecommendations()
+              )
           );
       }
     }
@@ -54,35 +56,37 @@ const withMovieDetails = WrappedComponent =>
 
     getCredits() {
       const { currentMovie } = this.state;
-      const id = this.props.match.params.id;
-      if (id) {
-        axios.get(`${API_END_POINT}movie/${id}/credits?api_key=${API_KEY}`).then(resp =>
-          this.setState(
-            {
-              currentMovie: {
-                ...currentMovie,
-                credits: resp.data.cast
-              }
-            },
-            () => this.getKeywords()
-          )
-        );
+      if (currentMovie.id) {
+        axios
+          .get(`${API_END_POINT}movie/${currentMovie.id}/credits?api_key=${API_KEY}`)
+          .then(resp =>
+            this.setState(
+              {
+                currentMovie: {
+                  ...currentMovie,
+                  credits: resp.data.cast
+                }
+              },
+              () => this.getKeywords()
+            )
+          );
       }
     }
 
     getKeywords() {
       const { currentMovie } = this.state;
-      const id = this.props.match.params.id;
 
-      if (id) {
-        axios.get(`${API_END_POINT}movie/${id}/keywords?api_key=${API_KEY}`).then(resp =>
-          this.setState({
-            currentMovie: {
-              ...currentMovie,
-              keywords: resp.data.keywords
-            }
-          })
-        );
+      if (currentMovie.id) {
+        axios
+          .get(`${API_END_POINT}movie/${currentMovie.id}/keywords?api_key=${API_KEY}`)
+          .then(resp =>
+            this.setState({
+              currentMovie: {
+                ...currentMovie,
+                keywords: resp.data.keywords
+              }
+            })
+          );
       }
     }
 

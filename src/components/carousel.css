@@ -1,6 +1,6 @@
 .carousel-container {
   position: relative;
-  height: 560px;
+  height: 500px;
   width: 100vw;
 }
 
@@ -12,22 +12,22 @@
 
 .tag-block {
   position: absolute;
-  top: 0px;
+  top: 120px;
   padding-left: 20px;
   padding-top: 5px;
-  background-color: #39f10b;
-  color: #021529;
-  height: 40px;
-  width: 100%;
+  background-color: rgba(82, 252, 4, 0.7);
+  color: #076103;
+  height: 30px;
+  width: 28%;
 }
 
 .text-block {
   position: absolute;
-  bottom: 40px;
+  bottom: 50px;
   left: 0px;
-  width: 33vw;
-  height: 50%;
+  width: 28vw;
+  height: 60%;
   background-color: rgba(238, 238, 238, 0.9);
-  padding: 20px;
-  padding-right: 20px;
+  padding: 25px;
+  padding-right: 40px;
 }

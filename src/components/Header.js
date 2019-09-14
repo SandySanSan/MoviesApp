@@ -17,11 +17,10 @@ const Header = ({ searchVideo }) => {
         mode='horizontal'
         // defaultSelectedKeys={["1"]}
         style={{ lineHeight: "64px" }}>
-        <Menu.Item key='1'>
+        {/* <Menu.Item key='1'>
           <Link to='/movies-list'>All the Movies</Link>
-        </Menu.Item>
-        <Menu.Item key='2'>nav 2</Menu.Item>
-        <Menu.Item key='3'>
+        </Menu.Item> */}
+        <Menu.Item key='3' style={{ width: "30vw" }}>
           <SearchBar searchVideo={searchVideo} />
         </Menu.Item>
       </Menu>

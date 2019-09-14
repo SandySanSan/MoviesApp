@@ -11,13 +11,11 @@ const LatestMovies = ({ nowPlaying }) => (
     <Row gutter={16}>
       <Card title='Now playing'>
         {nowPlaying.map(item => (
-          // <Link to='/details'>
           <Card.Grid style={gridStyle} hoverable key={item.poster_path}>
             <Link to={`/movie-details/${item.id}`}>
               <img src={`https://image.tmdb.org/t/p/w185${item.poster_path}`} alt={item.title} />
             </Link>
           </Card.Grid>
-          // </Link>
         ))}
       </Card>
     </Row>
