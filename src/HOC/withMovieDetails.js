@@ -64,7 +64,7 @@ const withMovieDetails = WrappedComponent =>
               {
                 currentMovie: {
                   ...currentMovie,
-                  credits: resp.data.cast
+                  credits: resp.data
                 }
               },
               () => this.getKeywords()

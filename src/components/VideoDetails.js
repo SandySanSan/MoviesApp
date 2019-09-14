@@ -1,6 +1,7 @@
 import React from "react";
-import { Typography, Row, Rate, Tabs, Icon, Table, Tag } from "antd";
+import { Typography, Row, Rate, Tabs, Icon, Table, Tag, Col } from "antd";
 import "./videoList.css";
+import noImage from "../img/noImage-profile.jpg";
 
 const { Title } = Typography;
 const { TabPane } = Tabs;
@@ -10,6 +11,10 @@ const VideoDetails = ({ currentMovie, youtubeKey }) => {
   const computeStars = average => Math.round(average / 2, 1);
 
   const columns = [
+    {
+      title: "Photo",
+      dataIndex: "photo"
+    },
     {
       title: "Name",
       dataIndex: "name"
@@ -22,11 +27,26 @@ const VideoDetails = ({ currentMovie, youtubeKey }) => {
 
   const data =
     currentMovie.credits &&
-    currentMovie.credits.map((actor, index) => ({
-      key: `${index}`,
-      name: `${actor.name}`,
-      character: `${actor.character}`
-    }));
+    currentMovie.credits.cast.map((actor, index) => {
+      const img = actor.profile_path ? (
+        <img
+          src={`http://image.tmdb.org/t/p/w45${actor.profile_path}`}
+          alt={actor.profile_path}
+          className='avatar-img-round'
+        />
+      ) : (
+        <img src={noImage} alt='no profile provided' />
+      );
+      return {
+        key: `${index}`,
+        name: `${actor.name}`,
+        character: `${actor.character}`,
+        photo: img
+      };
+    });
+
+  const directorName =
+    currentMovie.credits && currentMovie.credits.crew.filter(crew => crew.job === "Director");
 
   return (
     <Row style={{ padding: "10px" }}>
@@ -44,10 +64,24 @@ const VideoDetails = ({ currentMovie, youtubeKey }) => {
           alt={currentMovie.title}
         />
       )}
-      <Title level={2} style={{ paddingTop: "10px" }}>
-        {currentMovie.title} ({currentMovie.release_date && currentMovie.release_date.slice(0, 4)})
-      </Title>
-      <Rate disabled allowHalf value={currentMovie && computeStars(currentMovie.vote_average)} />
+      <Row>
+        <Col span={20}>
+          <Title level={2} style={{ paddingTop: "10px" }}>
+            {currentMovie.title} (
+            {currentMovie.release_date && currentMovie.release_date.slice(0, 4)})
+          </Title>
+        </Col>
+        <Col span={4}>
+          <Rate
+            disabled
+            allowHalf
+            value={currentMovie && computeStars(currentMovie.vote_average)}
+          />
+        </Col>
+      </Row>
+      <Tag color='green'>
+        DIRECTOR :{currentMovie.credits && directorName.map(director => director.name)}
+      </Tag>
       <p style={{ padding: "20px 0 30px 0" }}>{currentMovie.overview}</p>
       <p>Keywords :</p>
       <div style={{ padding: "0 0 30px 0" }}>
