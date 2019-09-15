@@ -31,11 +31,11 @@ const MoreDetails = ({
           <Content
             style={{
               background: "#fff",
-              padding: 40,
-              margin: 0
+              margin: 0,
+              paddingRight: 40
             }}>
             <Row gutter={25}>
-              <Col span={15}>
+              <Col span={15} style={{ backgroundColor: "#a7a7a7", padding: 60 }}>
                 <VideoDetails
                   currentMovie={currentMovie}
                   searchVideo={searchVideo}
@@ -50,7 +50,7 @@ const MoreDetails = ({
                   person={person}
                 />
               </Col>
-              <Col span={8} offset={1}>
+              <Col span={8} offset={1} style={{ paddingTop: 40 }}>
                 <VideoList
                   computeStars={computeStars}
                   recoMovies={recoMovies}

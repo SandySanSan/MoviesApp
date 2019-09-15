@@ -16,7 +16,7 @@ const LatestMovies = ({ nowPlaying }) => (
           </h4>
         </div>
         {nowPlaying.map(item => (
-          <Card.Grid style={gridStyle} hoverable key={item.poster_path}>
+          <Card.Grid style={gridStyle} key={item.poster_path}>
             <Link to={`/movie-details/${item.id}`}>
               <img src={`https://image.tmdb.org/t/p/w185${item.poster_path}`} alt={item.title} />
             </Link>

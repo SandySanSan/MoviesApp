@@ -1,7 +1,7 @@
 import React from "react";
 
-import { Drawer, Col, Row, Divider } from "antd";
-
+import { Drawer, Col, Row, Divider, Typography } from "antd";
+const { Title } = Typography;
 const DrawerProfile = ({ visible, onClose, showDrawer, person }) => {
   const pStyle = {
     fontSize: 16,
@@ -15,7 +15,7 @@ const DrawerProfile = ({ visible, onClose, showDrawer, person }) => {
     <div
       style={{
         fontSize: 14,
-        lineHeight: "22px",
+        lineHeight: "18px",
         marginBottom: 7,
         color: "rgba(0,0,0,0.65)"
       }}>
@@ -32,36 +32,29 @@ const DrawerProfile = ({ visible, onClose, showDrawer, person }) => {
   );
   return (
     <div>
-      />
       <Drawer width={640} placement='right' closable={false} onClose={onClose} visible={visible}>
         <Row>
-          <Col span={12}>
+          <Col span={24}>
             <img src={`http://image.tmdb.org/t/p/w500${person.profile_path}`} alt={person.name} />
-            <DescriptionItem title='Full Name' content={person.name} />
+            <Title className='movies-title' style={{ paddingTop: 15 }}>
+              {person.name}
+            </Title>
           </Col>
         </Row>
         <Row>
           <Col span={12}>
-            <DescriptionItem title='City' content='HangZhou' />
-          </Col>
-          <Col span={12}>
-            <DescriptionItem title='Country' content='China🇨🇳' />
-          </Col>
-        </Row>
-        <Row>
-          <Col span={12}>
-            <DescriptionItem title='Birthday' content='February 2,1900' />
-          </Col>
-          <Col span={12}>
-            <DescriptionItem title='Website' content='-' />
+            <DescriptionItem title='Birthday' content={person.birthday} />
           </Col>
         </Row>
         <Row>
           <Col span={24}>
-            <DescriptionItem
-              title='Message'
-              content='Make things as simple as possible but no simpler.'
-            />
+            <DescriptionItem title='Place of Birth' content={person.place_of_birth} />
+          </Col>
+        </Row>
+
+        <Row>
+          <Col span={24}>
+            <DescriptionItem title='Biography' content={person.biography} />
           </Col>
         </Row>
         <Divider />
