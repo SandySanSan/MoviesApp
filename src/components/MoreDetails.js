@@ -8,7 +8,21 @@ import VideoList from "./VideoList";
 
 const { Content } = Layout;
 
-const MoreDetails = ({ currentMovie, handleClickCurrent, searchVideo, recoMovies, youtubeKey }) => {
+const MoreDetails = ({
+  currentMovie,
+  handleClickCurrent,
+  searchVideo,
+  recoMovies,
+  youtubeKey,
+  data,
+  computeStars,
+  columns,
+  directorName,
+  visible,
+  onClose,
+  showDrawer,
+  person
+}) => {
   return (
     <Layout>
       <Header searchVideo={searchVideo} />
@@ -20,16 +34,28 @@ const MoreDetails = ({ currentMovie, handleClickCurrent, searchVideo, recoMovies
               padding: 40,
               margin: 0
             }}>
-            <Row gutter={16}>
-              <Col span={16}>
+            <Row gutter={25}>
+              <Col span={15}>
                 <VideoDetails
                   currentMovie={currentMovie}
                   searchVideo={searchVideo}
                   youtubeKey={youtubeKey}
+                  data={data}
+                  computeStars={computeStars}
+                  directorName={directorName}
+                  columns={columns}
+                  visible={visible}
+                  onClose={onClose}
+                  showDrawer={showDrawer}
+                  person={person}
                 />
               </Col>
-              <Col span={8}>
-                <VideoList recoMovies={recoMovies} handleClickCurrent={handleClickCurrent} />
+              <Col span={8} offset={1}>
+                <VideoList
+                  computeStars={computeStars}
+                  recoMovies={recoMovies}
+                  handleClickCurrent={handleClickCurrent}
+                />
               </Col>
             </Row>
           </Content>

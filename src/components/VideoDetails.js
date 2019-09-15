@@ -1,69 +1,43 @@
 import React from "react";
-import { Typography, Row, Rate, Tabs, Icon, Table, Tag, Col } from "antd";
+import { Typography, Row, Statistic, Rate, Tabs, Icon, Table, Tag, Col, BackTop } from "antd";
 import "./videoList.css";
-import noImage from "../img/noImage-profile.jpg";
+import DrawerProfile from "./DrawerProfile";
 
 const { Title } = Typography;
 const { TabPane } = Tabs;
+const BASE_URL = "https://www.youtube.com/embed/";
 
-const VideoDetails = ({ currentMovie, youtubeKey }) => {
-  const BASE_URL = "https://www.youtube.com/embed/";
-  const computeStars = average => Math.round(average / 2, 1);
-
-  const columns = [
-    {
-      title: "Photo",
-      dataIndex: "photo"
-    },
-    {
-      title: "Name",
-      dataIndex: "name"
-    },
-    {
-      title: "Character",
-      dataIndex: "character"
-    }
-  ];
-
-  const data =
-    currentMovie.credits &&
-    currentMovie.credits.cast.map((actor, index) => {
-      const img = actor.profile_path ? (
-        <img
-          src={`http://image.tmdb.org/t/p/w45${actor.profile_path}`}
-          alt={actor.profile_path}
-          className='avatar-img-round'
-        />
-      ) : (
-        <img src={noImage} alt='no profile provided' />
-      );
-      return {
-        key: `${index}`,
-        name: `${actor.name}`,
-        character: `${actor.character}`,
-        photo: img
-      };
-    });
-
-  const directorName =
-    currentMovie.credits && currentMovie.credits.crew.filter(crew => crew.job === "Director");
-
+const VideoDetails = ({
+  currentMovie,
+  youtubeKey,
+  data,
+  computeStars,
+  directorName,
+  columns,
+  visible,
+  onClose,
+  showDrawer,
+  person
+}) => {
   return (
     <Row style={{ padding: "10px" }}>
-      {currentMovie && youtubeKey !== "" ? (
-        <iframe
-          width='100%'
-          height='600px'
-          autoPlay={false}
-          title='video'
-          src={`${BASE_URL}${youtubeKey}`}
-        />
-      ) : (
-        <img
-          src={`http://image.tmdb.org/t/p/w500${currentMovie.poster_path}`}
-          alt={currentMovie.title}
-        />
-      )}
+      <BackTop />
+      <Row>
+        {currentMovie && youtubeKey !== "" ? (
+          <iframe
+            width='100%'
+            height='600px'
+            autoPlay={false}
+            title='video'
+            src={`${BASE_URL}${youtubeKey}`}
+          />
+        ) : (
+          <img
+            src={`http://image.tmdb.org/t/p/w500${currentMovie.poster_path}`}
+            alt={currentMovie.title}
+          />
+        )}
+      </Row>
       <Row>
         <Col span={20}>
           <Title level={2} style={{ paddingTop: "10px" }}>
@@ -72,15 +46,20 @@ const VideoDetails = ({ currentMovie, youtubeKey }) => {
           </Title>
         </Col>
         <Col span={4}>
-          <Rate
-            disabled
-            allowHalf
-            value={currentMovie && computeStars(currentMovie.vote_average)}
-          />
+          <div>
+            <Rate
+              disabled
+              allowHalf
+              value={currentMovie && computeStars(currentMovie.vote_average)}
+            />
+          </div>
+          <div>
+            <Statistic value={currentMovie.vote_count} prefix={<Icon type='like' />} />
+          </div>
         </Col>
       </Row>
       <Tag color='green'>
-        DIRECTOR :{currentMovie.credits && directorName.map(director => director.name)}
+        Directed by {currentMovie.credits && directorName.map(director => `${director.name} `)}
       </Tag>
       <p style={{ padding: "20px 0 30px 0" }}>{currentMovie.overview}</p>
       <p>Keywords :</p>
@@ -93,7 +72,7 @@ const VideoDetails = ({ currentMovie, youtubeKey }) => {
           ))}
       </div>
 
-      <Tabs defaultActiveKey='1'>
+      <Tabs defaultActiveKey='1' tabPosition='left'>
         <TabPane
           tab={
             <span>
@@ -102,7 +81,7 @@ const VideoDetails = ({ currentMovie, youtubeKey }) => {
             </span>
           }
           key='1'>
-          <Table columns={columns} dataSource={data} size='middle' />
+          <Table columns={columns} dataSource={data} size='middle' pagination={{ pageSize: 5 }} />
         </TabPane>
         <TabPane
           tab={
@@ -115,6 +94,7 @@ const VideoDetails = ({ currentMovie, youtubeKey }) => {
           Tab 2
         </TabPane>
       </Tabs>
+      <DrawerProfile visible={visible} onClose={onClose} showDrawer={showDrawer} person={person} />
     </Row>
   );
 };
