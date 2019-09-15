@@ -10,7 +10,7 @@ const SEARCH_URL = "search/movie?";
 
 const withApiMovie = WrappedComponent =>
   class HOC extends Component {
-    state = { popularMovies: [], nowPlaying: [] };
+    state = { popularMovies: [], nowPlaying: [], loading: true };
 
     componentDidMount() {
       this.initPopularMovies();
@@ -23,7 +23,8 @@ const withApiMovie = WrappedComponent =>
           resp.data &&
           this.setState({
             popularMovies: resp.data.results.slice(0, 5),
-            currentMovie: resp.data.results[0]
+            currentMovie: resp.data.results[0],
+            loading: false
           })
       );
     };
@@ -47,13 +48,14 @@ const withApiMovie = WrappedComponent =>
     };
 
     render() {
-      const { popularMovies, nowPlaying } = this.state;
+      const { popularMovies, nowPlaying, loading } = this.state;
 
       return (
         <WrappedComponent
           popularMovies={popularMovies}
           searchVideo={this.searchVideo}
           nowPlaying={nowPlaying}
+          loading={loading}
         />
       );
     }

@@ -12,7 +12,7 @@ const LatestMovies = ({ nowPlaying }) => (
       <Card style={{ backgroundColor: "rgb(2, 21, 41,0)", border: 0 }} bordered={false}>
         <div className='tag-title'>
           <h4 style={{ color: "white" }}>
-            <b>NOW PLAYING</b>
+            <b>NOW PLAYING IN THEATERS</b>
           </h4>
         </div>
         {nowPlaying.map(item => (

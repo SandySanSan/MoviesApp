@@ -6,7 +6,7 @@ import LatestMovies from "./LatestMovies";
 import PopularMovies from "./PopularMovies";
 import "./global.css";
 
-const Home = ({ popularMovies, nowPlaying, searchVideo }) => {
+const Home = ({ popularMovies, nowPlaying, searchVideo, loading }) => {
   const { Content } = Layout;
   return (
     <Layout>
@@ -18,7 +18,7 @@ const Home = ({ popularMovies, nowPlaying, searchVideo }) => {
             margin: 0,
             minHeight: 280
           }}>
-          <PopularMovies popularMovies={popularMovies} />
+          <PopularMovies popularMovies={popularMovies} loading={loading} />
           <LatestMovies nowPlaying={nowPlaying} />
         </Content>
       </Layout>
