@@ -7,9 +7,9 @@ const gridStyle = {
   textAlign: "center"
 };
 const LatestMovies = ({ nowPlaying }) => (
-  <div style={{ background: "rgb(2, 21, 41)", padding: "20px 10px 20px 10px" }}>
+  <div style={{ background: "rgb(2, 21, 41,0)", padding: "20px 10px 20px 10px" }}>
     <Row gutter={16}>
-      <Card style={{ backgroundColor: "rgb(2, 21, 41)", border: 0 }} bordered={false}>
+      <Card style={{ backgroundColor: "rgb(2, 21, 41,0)", border: 0 }} bordered={false}>
         <div className='tag-title'>
           <h4 style={{ color: "white" }}>
             <b>NOW PLAYING</b>

@@ -17,7 +17,9 @@ const VideoDetails = ({
   visible,
   onClose,
   showDrawer,
-  person
+  person,
+  dataCrew,
+  columnsCrew
 }) => {
   return (
     <Row style={{ padding: "10px" }}>
@@ -72,12 +74,12 @@ const VideoDetails = ({
           ))}
       </div>
 
-      <Tabs defaultActiveKey='1' tabPosition='left'>
+      <Tabs defaultActiveKey='1' tabPosition='left' forceRender={true}>
         <TabPane
           tab={
             <span>
               <Icon type='team' />
-              Credits
+              Cast
             </span>
           }
           key='1'>
@@ -86,12 +88,17 @@ const VideoDetails = ({
         <TabPane
           tab={
             <span>
-              <Icon type='android' />
-              Tab 2
+              <Icon type='video-camera' />
+              Crew
             </span>
           }
           key='2'>
-          Tab 2
+          <Table
+            columns={columnsCrew}
+            dataSource={dataCrew}
+            size='middle'
+            pagination={{ pageSize: 5 }}
+          />
         </TabPane>
       </Tabs>
       <DrawerProfile visible={visible} onClose={onClose} showDrawer={showDrawer} person={person} />

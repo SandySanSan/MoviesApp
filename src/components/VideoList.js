@@ -10,11 +10,8 @@ const VideoList = ({ recoMovies, handleClickCurrent, computeStars }) => {
         RECOMMENDATIONS
       </Row>
       {recoMovies.map(item => (
-        <div>
-          <Row
-            className='hoverableRow'
-            onClick={() => handleClickCurrent(item)}
-            key={item.poster_path}>
+        <div key={`${item.name}-${item.poster_path}`}>
+          <Row className='hoverableRow' onClick={() => handleClickCurrent(item)}>
             <Col span={5} style={{ marginRight: "15px" }}>
               <img alt={item.title} src={`https://image.tmdb.org/t/p/w92${item.poster_path}`} />
             </Col>

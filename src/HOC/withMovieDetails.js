@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import noImage from "../img/noImage-profile.jpg";
-
+import { Button } from "antd";
 const API_END_POINT = "https://api.themoviedb.org/3/";
 const API_KEY = process.env.REACT_APP_MOVIES_API_KEY;
 
@@ -143,7 +143,36 @@ const withMovieDetails = WrappedComponent =>
             name: `${actor.name}`,
             character: `${actor.character}`,
             photo: img,
-            profile: <a onClick={() => this.getActorDetails(actor.id)}>View profile</a>
+            profile: (
+              <Button onClick={() => this.getActorDetails(actor.id)} type='link' block>
+                View profile
+              </Button>
+            )
+          };
+        });
+
+      const dataCrew =
+        currentMovie.credits &&
+        currentMovie.credits.crew.map(crew => {
+          const img = crew.profile_path ? (
+            <img
+              src={`http://image.tmdb.org/t/p/w45${crew.profile_path}`}
+              alt={crew.profile_path}
+              className='avatar-img-round'
+            />
+          ) : (
+            <img src={noImage} alt='no profile provided' />
+          );
+          return {
+            key: `${crew.id}`,
+            name: `${crew.name}`,
+            job: `${crew.job}`,
+            photo: img,
+            profile: (
+              <Button onClick={() => this.getActorDetails(crew.id)} type='link' block>
+                View profile
+              </Button>
+            )
           };
         });
 
@@ -159,6 +188,25 @@ const withMovieDetails = WrappedComponent =>
         {
           title: "Character",
           dataIndex: "character"
+        },
+        {
+          title: "",
+          dataIndex: "profile"
+        }
+      ];
+
+      const columnsCrew = [
+        {
+          title: "Photo",
+          dataIndex: "photo"
+        },
+        {
+          title: "Name",
+          dataIndex: "name"
+        },
+        {
+          title: "Job",
+          dataIndex: "job"
         },
         {
           title: "",
@@ -183,6 +231,8 @@ const withMovieDetails = WrappedComponent =>
           onClose={this.onClose}
           showDrawer={this.showDrawer}
           person={person}
+          dataCrew={dataCrew}
+          columnsCrew={columnsCrew}
         />
       );
     }
