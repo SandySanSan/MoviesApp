@@ -3,9 +3,10 @@ import { Drawer, Divider, Typography } from "antd";
 
 const { Paragraph } = Typography;
 
-const Reviews = ({ currentMovie, onClose, visible }) => {
+const DrawerReviews = ({ currentMovie, onClose, visible }) => {
   return (
     <Drawer width={640} placement='left' closable={false} onClose={onClose} visible={visible}>
+      <div className='movies-title'>Reviews</div>
       <div>
         {currentMovie.id &&
           currentMovie.reviews &&
@@ -22,4 +23,4 @@ const Reviews = ({ currentMovie, onClose, visible }) => {
   );
 };
 
-export default Reviews;
+export default DrawerReviews;
