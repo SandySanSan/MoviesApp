@@ -1,18 +1,5 @@
 import React from "react";
-import {
-  Typography,
-  Row,
-  Statistic,
-  Rate,
-  Tabs,
-  Icon,
-  Table,
-  Tag,
-  Col,
-  BackTop,
-  Button,
-  Divider
-} from "antd";
+import { Typography, Row, Rate, Tabs, Icon, Table, Tag, Col, BackTop, Button, Divider } from "antd";
 import "./videoList.css";
 import DrawerProfile from "./DrawerProfile";
 import Reviews from "./DrawerReviews";
@@ -72,7 +59,9 @@ const VideoDetails = ({
             />
           </div>
           <div>
-            <Statistic value={currentMovie.vote_count} prefix={<Icon type='like' />} />
+            <h2>
+              <Icon type='like' /> {currentMovie.popularity}
+            </h2>
           </div>
         </Col>
       </Row>
@@ -80,24 +69,34 @@ const VideoDetails = ({
         Directed by {currentMovie.credits && directorName.map(director => `${director.name} `)}
       </h3>
       <p style={{ padding: "20px 0 20px 0" }}>{currentMovie.overview}</p>
-      <Button onClick={showDrawerReviews} icon='read' ghost>
-        REVIEWS
-      </Button>
+      {currentMovie.id && currentMovie.reviews && currentMovie.reviews.length !== 0 ? (
+        <Button onClick={showDrawerReviews} icon='read' ghost>
+          REVIEWS
+        </Button>
+      ) : (
+        ""
+      )}
       <Divider />
-      <h4 style={{ fontWeight: "bold" }}>Keywords </h4>
-      <div>
-        {currentMovie.keywords &&
-          currentMovie.keywords.map(keyword => (
-            <Tag
-              key={keyword.name}
-              style={{ marginBottom: "8px", backgroundColor: "#8f919c" }}
-              color='yellow'
-              ghost>
-              {keyword.name}
-            </Tag>
-          ))}
-      </div>
-      <Divider />
+      {currentMovie.keywords && currentMovie.keywords.length !== 0 ? (
+        <div>
+          <h4 style={{ fontWeight: "bold" }}>Keywords </h4>
+          <div>
+            {currentMovie.keywords &&
+              currentMovie.keywords.map(keyword => (
+                <Tag
+                  key={keyword.name}
+                  style={{ marginBottom: "8px", backgroundColor: "#8f919c" }}
+                  color='yellow'
+                  ghost>
+                  {keyword.name}
+                </Tag>
+              ))}
+          </div>
+          <Divider />
+        </div>
+      ) : (
+        ""
+      )}
       <Tabs defaultActiveKey='1' tabPosition='left' forceRender={true}>
         <TabPane
           tab={
