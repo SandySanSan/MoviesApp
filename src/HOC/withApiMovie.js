@@ -10,11 +10,13 @@ const SEARCH_URL = "search/movie?";
 
 const withApiMovie = WrappedComponent =>
   class HOC extends Component {
-    state = { popularMovies: [], nowPlaying: [] };
+    state = { popularMovies: [], nowPlaying: [], loading: true, trending: [], trendingPersons: [] };
 
     componentDidMount() {
       this.initPopularMovies();
-      this.InitNowPlayingMovies();
+      this.initNowPlayingMovies();
+      this.initTrendings();
+      this.initTrendingsPersons();
     }
 
     initPopularMovies = () => {
@@ -23,15 +25,28 @@ const withApiMovie = WrappedComponent =>
           resp.data &&
           this.setState({
             popularMovies: resp.data.results.slice(0, 5),
-            currentMovie: resp.data.results[0]
+            currentMovie: resp.data.results[0],
+            loading: false
           })
       );
     };
 
-    InitNowPlayingMovies() {
+    initNowPlayingMovies() {
       axios
         .get(`${API_END_POINT}movie/now_playing?api_key=${API_KEY}&language=en-US`)
         .then(resp => this.setState({ nowPlaying: resp.data.results.slice(0, 6) }));
+    }
+
+    initTrendings() {
+      axios
+        .get(`${API_END_POINT}trending/movie/day?api_key=${API_KEY}&language=en-US`)
+        .then(resp => this.setState({ trending: resp.data.results.slice(0, 5) }));
+    }
+
+    initTrendingsPersons() {
+      axios
+        .get(`${API_END_POINT}trending/person/day?api_key=${API_KEY}&language=en-US`)
+        .then(resp => this.setState({ trendingPersons: resp.data.results.slice(0, 5) }));
     }
 
     searchVideo = searchText => {
@@ -47,13 +62,16 @@ const withApiMovie = WrappedComponent =>
     };
 
     render() {
-      const { popularMovies, nowPlaying } = this.state;
+      const { popularMovies, nowPlaying, loading, trending, trendingPersons } = this.state;
 
       return (
         <WrappedComponent
           popularMovies={popularMovies}
           searchVideo={this.searchVideo}
           nowPlaying={nowPlaying}
+          loading={loading}
+          trending={trending}
+          trendingPersons={trendingPersons}
         />
       );
     }

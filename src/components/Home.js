@@ -4,10 +4,12 @@ import { Layout } from "antd";
 import withApiMovie from "../HOC/withApiMovie";
 import LatestMovies from "./LatestMovies";
 import PopularMovies from "./PopularMovies";
+import Trendings from "./Trendings";
 import "./global.css";
+import FooterCredits from "./Footer";
 
-const Home = ({ popularMovies, nowPlaying, searchVideo }) => {
-  const { Content } = Layout;
+const Home = ({ popularMovies, nowPlaying, searchVideo, loading, trending, trendingPersons }) => {
+  const { Content, Footer } = Layout;
   return (
     <Layout>
       <Header searchVideo={searchVideo} />
@@ -18,10 +20,14 @@ const Home = ({ popularMovies, nowPlaying, searchVideo }) => {
             margin: 0,
             minHeight: 280
           }}>
-          <PopularMovies popularMovies={popularMovies} />
+          <PopularMovies popularMovies={popularMovies} loading={loading} />
           <LatestMovies nowPlaying={nowPlaying} />
+          <Trendings trending={trending} trendingPersons={trendingPersons} />
         </Content>
       </Layout>
+      <Footer>
+        <FooterCredits />
+      </Footer>
     </Layout>
   );
 };

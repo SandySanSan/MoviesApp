@@ -2,7 +2,7 @@ import React from "react";
 import { Typography, Row, Rate, Tabs, Icon, Table, Tag, Col, BackTop, Button, Divider } from "antd";
 import "./videoList.css";
 import DrawerProfile from "./DrawerProfile";
-import Reviews from "./DrawerReviews";
+import DrawerReviews from "./DrawerReviews";
 
 const { Title } = Typography;
 const { TabPane } = Tabs;
@@ -124,7 +124,7 @@ const VideoDetails = ({
           />
         </TabPane>
       </Tabs>
-      <Reviews
+      <DrawerReviews
         currentMovie={currentMovie}
         visible={reviewsVisible}
         onClose={onClose}
