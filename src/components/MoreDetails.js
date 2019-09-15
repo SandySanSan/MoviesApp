@@ -8,7 +8,23 @@ import VideoList from "./VideoList";
 
 const { Content } = Layout;
 
-const MoreDetails = ({ currentMovie, handleClickCurrent, searchVideo, recoMovies, youtubeKey }) => {
+const MoreDetails = ({
+  currentMovie,
+  handleClickCurrent,
+  searchVideo,
+  recoMovies,
+  youtubeKey,
+  data,
+  computeStars,
+  columns,
+  directorName,
+  visible,
+  onClose,
+  showDrawer,
+  person,
+  dataCrew,
+  columnsCrew
+}) => {
   return (
     <Layout>
       <Header searchVideo={searchVideo} />
@@ -17,19 +33,40 @@ const MoreDetails = ({ currentMovie, handleClickCurrent, searchVideo, recoMovies
           <Content
             style={{
               background: "#fff",
-              padding: 40,
-              margin: 0
+              margin: 0,
+              paddingRight: 40
             }}>
-            <Row gutter={16}>
-              <Col span={16}>
+            <Row gutter={25}>
+              <Col
+                span={15}
+                style={{
+                  backgroundImage:
+                    "linear-gradient(to bottom, #021529, #3e4557, #7a7d8a, #babac1, #fbfbfb)",
+                  padding: 60,
+                  boxShadow: "0px 10px 16px #021529"
+                }}>
                 <VideoDetails
                   currentMovie={currentMovie}
                   searchVideo={searchVideo}
                   youtubeKey={youtubeKey}
+                  data={data}
+                  computeStars={computeStars}
+                  directorName={directorName}
+                  columns={columns}
+                  visible={visible}
+                  onClose={onClose}
+                  showDrawer={showDrawer}
+                  person={person}
+                  dataCrew={dataCrew}
+                  columnsCrew={columnsCrew}
                 />
               </Col>
-              <Col span={8}>
-                <VideoList recoMovies={recoMovies} handleClickCurrent={handleClickCurrent} />
+              <Col span={8} offset={1} style={{ paddingTop: 40 }}>
+                <VideoList
+                  computeStars={computeStars}
+                  recoMovies={recoMovies}
+                  handleClickCurrent={handleClickCurrent}
+                />
               </Col>
             </Row>
           </Content>

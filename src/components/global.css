@@ -4,3 +4,8 @@
   font-family: "IM Fell DW Pica", serif;
   font-size: 50px;
 }
+
+.ant-layout-content {
+  /* background-color: rgb(2, 21, 41); */
+  background-image: linear-gradient(to bottom, #021529, #06192c, #0b1d2f, #0f2033, #142436);
+}

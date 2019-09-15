@@ -16,7 +16,7 @@ const PopularMovies = ({ popularMovies }) => (
               className='poster-carousel'
             />
             <div className='tag-block'>
-              <h4>
+              <h4 style={{ color: "white" }}>
                 <b>MOST POPULAR MOVIES</b>
               </h4>
             </div>

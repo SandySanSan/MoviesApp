@@ -4,6 +4,7 @@ import { Layout } from "antd";
 import withApiMovie from "../HOC/withApiMovie";
 import LatestMovies from "./LatestMovies";
 import PopularMovies from "./PopularMovies";
+import "./global.css";
 
 const Home = ({ popularMovies, nowPlaying, searchVideo }) => {
   const { Content } = Layout;
@@ -11,18 +12,15 @@ const Home = ({ popularMovies, nowPlaying, searchVideo }) => {
     <Layout>
       <Header searchVideo={searchVideo} />
       <Layout>
-        <Layout>
-          <Content
-            style={{
-              background: "#fff",
-              padding: 40,
-              margin: 0,
-              minHeight: 280
-            }}>
-            <PopularMovies popularMovies={popularMovies} />
-            <LatestMovies nowPlaying={nowPlaying} />
-          </Content>
-        </Layout>
+        <Content
+          style={{
+            padding: "20px 40px 0 40px",
+            margin: 0,
+            minHeight: 280
+          }}>
+          <PopularMovies popularMovies={popularMovies} />
+          <LatestMovies nowPlaying={nowPlaying} />
+        </Content>
       </Layout>
     </Layout>
   );

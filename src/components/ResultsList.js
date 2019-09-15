@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Row, Col, Card, Layout, Typography } from "antd";
+import { Row, Col, Card, Layout, Typography, BackTop } from "antd";
 import noImage from "../img/noImage.jpg";
 
 const ResultsList = ({ searchresults, text }) => {
@@ -16,6 +16,7 @@ const ResultsList = ({ searchresults, text }) => {
     <Layout>
       <Content>
         <Row style={{ width: "90vw" }}>
+          <BackTop />
           <Col>
             <Card title={`${searchresults.total_results} results for "${text}" `}>
               {searchresults.results &&
