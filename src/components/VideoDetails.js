@@ -1,7 +1,21 @@
 import React from "react";
-import { Typography, Row, Statistic, Rate, Tabs, Icon, Table, Tag, Col, BackTop } from "antd";
+import {
+  Typography,
+  Row,
+  Statistic,
+  Rate,
+  Tabs,
+  Icon,
+  Table,
+  Tag,
+  Col,
+  BackTop,
+  Button,
+  Divider
+} from "antd";
 import "./videoList.css";
 import DrawerProfile from "./DrawerProfile";
+import Reviews from "./DrawerReviews";
 
 const { Title } = Typography;
 const { TabPane } = Tabs;
@@ -15,8 +29,10 @@ const VideoDetails = ({
   directorName,
   columns,
   visible,
+  reviewsVisible,
   onClose,
   showDrawer,
+  showDrawerReviews,
   person,
   dataCrew,
   columnsCrew
@@ -42,7 +58,7 @@ const VideoDetails = ({
       </Row>
       <Row>
         <Col span={20}>
-          <Title level={2} style={{ paddingTop: "10px" }}>
+          <Title level={1} style={{ paddingTop: "10px" }} className='movies-title'>
             {currentMovie.title} (
             {currentMovie.release_date && currentMovie.release_date.slice(0, 4)})
           </Title>
@@ -60,20 +76,28 @@ const VideoDetails = ({
           </div>
         </Col>
       </Row>
-      <Tag color='green'>
+      <h3 style={{ fontWeight: "bold" }}>
         Directed by {currentMovie.credits && directorName.map(director => `${director.name} `)}
-      </Tag>
-      <p style={{ padding: "20px 0 30px 0" }}>{currentMovie.overview}</p>
-      <p>Keywords :</p>
-      <div style={{ padding: "0 0 30px 0" }}>
+      </h3>
+      <p style={{ padding: "20px 0 20px 0" }}>{currentMovie.overview}</p>
+      <Button onClick={showDrawerReviews} icon='read' ghost>
+        REVIEWS
+      </Button>
+      <Divider />
+      <h4 style={{ fontWeight: "bold" }}>Keywords </h4>
+      <div>
         {currentMovie.keywords &&
           currentMovie.keywords.map(keyword => (
-            <Tag key={keyword.name} style={{ marginBottom: "8px" }}>
+            <Tag
+              key={keyword.name}
+              style={{ marginBottom: "8px", backgroundColor: "#8f919c" }}
+              color='yellow'
+              ghost>
               {keyword.name}
             </Tag>
           ))}
       </div>
-
+      <Divider />
       <Tabs defaultActiveKey='1' tabPosition='left' forceRender={true}>
         <TabPane
           tab={
@@ -101,6 +125,14 @@ const VideoDetails = ({
           />
         </TabPane>
       </Tabs>
+      <Reviews
+        currentMovie={currentMovie}
+        visible={reviewsVisible}
+        onClose={onClose}
+        showDrawerReviews={showDrawerReviews}
+        person={person}
+      />
+
       <DrawerProfile visible={visible} onClose={onClose} showDrawer={showDrawer} person={person} />
     </Row>
   );

@@ -19,8 +19,10 @@ const MoreDetails = ({
   columns,
   directorName,
   visible,
+  reviewsVisible,
   onClose,
   showDrawer,
+  showDrawerReviews,
   person,
   dataCrew,
   columnsCrew
@@ -59,6 +61,8 @@ const MoreDetails = ({
                   person={person}
                   dataCrew={dataCrew}
                   columnsCrew={columnsCrew}
+                  showDrawerReviews={showDrawerReviews}
+                  reviewsVisible={reviewsVisible}
                 />
               </Col>
               <Col span={8} offset={1} style={{ paddingTop: 40 }}>

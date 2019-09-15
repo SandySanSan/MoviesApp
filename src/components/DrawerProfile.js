@@ -2,7 +2,7 @@ import React from "react";
 
 import { Drawer, Col, Row, Divider, Typography } from "antd";
 const { Title } = Typography;
-const DrawerProfile = ({ visible, onClose, showDrawer, person }) => {
+const DrawerProfile = ({ visible, onClose, person }) => {
   const DescriptionItem = ({ title, content }) => (
     <div
       style={{

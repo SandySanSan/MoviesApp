@@ -12,6 +12,7 @@ const withMovieDetails = WrappedComponent =>
       recoMovies: [],
       youtubeKey: "",
       visible: false,
+      reviewsVisible: false,
       person: []
     };
 
@@ -83,10 +84,29 @@ const withMovieDetails = WrappedComponent =>
         axios
           .get(`${API_END_POINT}movie/${currentMovie.id}/keywords?api_key=${API_KEY}`)
           .then(resp =>
+            this.setState(
+              {
+                currentMovie: {
+                  ...currentMovie,
+                  keywords: resp.data.keywords
+                }
+              },
+              () => this.getReviews()
+            )
+          );
+      }
+    }
+
+    getReviews() {
+      const { currentMovie } = this.state;
+      if (currentMovie.id) {
+        axios
+          .get(`${API_END_POINT}movie/${currentMovie.id}/reviews?api_key=${API_KEY}`)
+          .then(resp =>
             this.setState({
               currentMovie: {
                 ...currentMovie,
-                keywords: resp.data.keywords
+                reviews: resp.data.results
               }
             })
           );
@@ -115,16 +135,23 @@ const withMovieDetails = WrappedComponent =>
       });
     };
 
+    showDrawerReviews = () => {
+      this.setState({
+        reviewsVisible: true
+      });
+    };
+
     onClose = () => {
       this.setState({
-        visible: false
+        visible: false,
+        reviewsVisible: false
       });
     };
 
     computeStars = average => Math.round(average / 2, 1);
 
     render() {
-      const { currentMovie, recoMovies, youtubeKey, visible, person } = this.state;
+      const { currentMovie, recoMovies, youtubeKey, visible, person, reviewsVisible } = this.state;
 
       const data =
         currentMovie.credits &&
@@ -228,8 +255,10 @@ const withMovieDetails = WrappedComponent =>
           directorName={directorName}
           columns={columns}
           visible={visible}
+          reviewsVisible={reviewsVisible}
           onClose={this.onClose}
           showDrawer={this.showDrawer}
+          showDrawerReviews={this.showDrawerReviews}
           person={person}
           dataCrew={dataCrew}
           columnsCrew={columnsCrew}

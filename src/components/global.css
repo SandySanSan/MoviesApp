@@ -9,3 +9,11 @@
   /* background-color: rgb(2, 21, 41); */
   background-image: linear-gradient(to bottom, #021529, #06192c, #0b1d2f, #0f2033, #142436);
 }
+
+.ant-tabs-nav .ant-tabs-tab-active {
+  color: yellow !important;
+}
+
+.ant-tabs-ink-bar {
+  background-color: yellow !important;
+}
