@@ -86,7 +86,6 @@ const VideoDetails = ({
                 <Tag
                   key={keyword.name}
                   style={{ marginBottom: "8px", backgroundColor: "#8f919c" }}
-                  color='yellow'
                   ghost>
                   {keyword.name}
                 </Tag>

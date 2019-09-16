@@ -11,7 +11,7 @@ const DrawerReviews = ({ currentMovie, onClose, visible }) => {
         {currentMovie.id &&
           currentMovie.reviews &&
           currentMovie.reviews.map(review => (
-            <div style={{ padding: 15 }}>
+            <div style={{ padding: 15 }} key={review.id}>
               <h2>{review.content.split(" ", 7).join(" ")} ... </h2>
               <h4>by {review.author}</h4>
               <Paragraph ellipsis={{ rows: 5, expandable: true }}>{review.content}</Paragraph>

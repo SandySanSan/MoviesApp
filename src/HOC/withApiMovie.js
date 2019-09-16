@@ -6,7 +6,6 @@ const API_END_POINT = "https://api.themoviedb.org/3/";
 const POPULAR_MOVIES_URL =
   "discover/movie?language=en&sort_by=popularity.desc&include_adult=false&api_key=";
 const URL = `${API_END_POINT}${POPULAR_MOVIES_URL}${API_KEY}`;
-const SEARCH_URL = "search/movie?";
 
 const withApiMovie = WrappedComponent =>
   class HOC extends Component {
@@ -49,25 +48,12 @@ const withApiMovie = WrappedComponent =>
         .then(resp => this.setState({ trendingPersons: resp.data.results.slice(0, 5) }));
     }
 
-    searchVideo = searchText => {
-      if (searchText) {
-        axios
-          .get(`${API_END_POINT}${SEARCH_URL}api_key=${API_KEY}&query=${searchText}`)
-          .then(resp => {
-            if (resp.data && resp.data.results[0]) {
-              this.setState({ currentMovie: resp.data.results[0] });
-            }
-          });
-      }
-    };
-
     render() {
       const { popularMovies, nowPlaying, loading, trending, trendingPersons } = this.state;
 
       return (
         <WrappedComponent
           popularMovies={popularMovies}
-          searchVideo={this.searchVideo}
           nowPlaying={nowPlaying}
           loading={loading}
           trending={trending}

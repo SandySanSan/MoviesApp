@@ -11,9 +11,13 @@
 }
 
 .ant-tabs-nav .ant-tabs-tab-active {
-  color: yellow !important;
+  color: greenyellow !important;
 }
 
 .ant-tabs-ink-bar {
-  background-color: yellow !important;
+  background-color: greenyellow !important;
+}
+
+.ant-tabs-tab {
+  color: whitesmoke !important;
 }

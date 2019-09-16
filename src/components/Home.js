@@ -8,11 +8,11 @@ import Trendings from "./Trendings";
 import "./global.css";
 import FooterCredits from "./Footer";
 
-const Home = ({ popularMovies, nowPlaying, searchVideo, loading, trending, trendingPersons }) => {
+const Home = ({ popularMovies, nowPlaying, loading, trending, trendingPersons }) => {
   const { Content, Footer } = Layout;
   return (
     <Layout>
-      <Header searchVideo={searchVideo} />
+      <Header />
       <Layout>
         <Content
           style={{

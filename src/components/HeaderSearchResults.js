@@ -1,11 +1,10 @@
 import React from "react";
-import SearchBar from "./SearchBar";
 import { Link } from "react-router-dom";
 
 import "./header.css";
 import { Layout, Menu } from "antd";
 
-const Header = () => {
+const HeaderSearchResults = () => {
   const { Header } = Layout;
   return (
     <Header className='header'>
@@ -20,12 +19,9 @@ const Header = () => {
         {/* <Menu.Item key='1'>
           <Link to='/movies-list'>All the Movies</Link>
         </Menu.Item> */}
-        <Menu.Item key='3' style={{ width: "30vw" }}>
-          <SearchBar />
-        </Menu.Item>
       </Menu>
     </Header>
   );
 };
 
-export default Header;
+export default HeaderSearchResults;

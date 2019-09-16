@@ -30,7 +30,8 @@ class SearchBar extends Component {
           placeholder='Search movies, people ...'
           onChange={this.handleChange}
           value={searchText}
-          onSearch={this.renderRedirect}
+          onSearch={() => this.renderRedirect()}
+          enterButton='Search'
         />
       </Fragment>
     );

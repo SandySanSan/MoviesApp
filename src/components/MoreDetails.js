@@ -29,7 +29,7 @@ const MoreDetails = ({
 }) => {
   return (
     <Layout>
-      <Header searchVideo={searchVideo} />
+      <Header />
       <Layout>
         <Layout>
           <Content
