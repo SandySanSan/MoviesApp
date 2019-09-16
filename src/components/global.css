@@ -21,3 +21,8 @@
 .ant-tabs-tab {
   color: whitesmoke !important;
 }
+
+.ant-menu-dark.ant-menu-horizontal > .ant-menu-item,
+.ant-menu-dark.ant-menu-horizontal > .ant-menu-submenu {
+  top: 20px !important;
+}

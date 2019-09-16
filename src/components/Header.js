@@ -12,14 +12,7 @@ const Header = () => {
       <Link to='/'>
         <div className='logo' />
       </Link>
-      <Menu
-        theme='dark'
-        mode='horizontal'
-        // defaultSelectedKeys={["1"]}
-        style={{ lineHeight: "64px" }}>
-        {/* <Menu.Item key='1'>
-          <Link to='/movies-list'>All the Movies</Link>
-        </Menu.Item> */}
+      <Menu theme='dark' mode='horizontal' style={{ lineHeight: "64px" }}>
         <Menu.Item key='3' style={{ width: "30vw" }}>
           <SearchBar />
         </Menu.Item>
