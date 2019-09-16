@@ -24,5 +24,9 @@
 
 .ant-menu-dark.ant-menu-horizontal > .ant-menu-item,
 .ant-menu-dark.ant-menu-horizontal > .ant-menu-submenu {
-  top: 20px !important;
+  padding-top: 20px !important;
+}
+
+.ant-btn-primary {
+  background-color: green !important;
 }
