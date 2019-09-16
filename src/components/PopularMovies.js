@@ -1,13 +1,39 @@
 import React from "react";
-import { Carousel, Typography, Button, Spin } from "antd";
+import { Carousel, Typography, Button, Icon } from "antd";
 import "./carousel.css";
 import "./global.css";
 const { Paragraph } = Typography;
 
-const PopularMovies = ({ popularMovies, loading }) => (
-  <div>
-    <Spin spinning={loading}>
-      <Carousel autoplay effect='fade'>
+const PopularMovies = ({ popularMovies, loading }) => {
+  let carousel = React.createRef();
+
+  function next() {
+    carousel.next();
+  }
+  function previous() {
+    carousel.prev();
+  }
+
+  return (
+    <div style={{ paddingBottom: "40px" }}>
+      <Button
+        onClick={() => next()}
+        type='link'
+        style={{
+          top: "33%",
+          right: "4%",
+          position: "absolute",
+          zIndex: 3
+        }}>
+        <Icon
+          type='right'
+          style={{
+            fontSize: "44px",
+            color: "lime"
+          }}
+        />
+      </Button>
+      <Carousel autoplay effect='fade' ref={node => (carousel = node)} speed='500'>
         {popularMovies &&
           popularMovies.map(movie => (
             <div className='carousel-container' key={movie.poster_path}>
@@ -31,8 +57,25 @@ const PopularMovies = ({ popularMovies, loading }) => (
             </div>
           ))}
       </Carousel>
-    </Spin>
-  </div>
-);
+      <Button
+        onClick={() => previous()}
+        type='link'
+        style={{
+          top: "33%",
+          left: "4%",
+          position: "absolute",
+          zIndex: 3
+        }}>
+        <Icon
+          type='left'
+          style={{
+            fontSize: "44px",
+            color: "lime"
+          }}
+        />
+      </Button>
+    </div>
+  );
+};
 
 export default PopularMovies;

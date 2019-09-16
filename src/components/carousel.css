@@ -19,6 +19,7 @@
   color: #076103;
   height: 30px;
   width: 245px;
+  left: 8vw;
 }
 
 .tag-title {
@@ -33,7 +34,7 @@
 .text-block {
   position: absolute;
   bottom: 50px;
-  left: 0px;
+  left: 8vw;
   width: 40vw;
   height: 60%;
   background-color: rgba(238, 238, 238, 0.9);
