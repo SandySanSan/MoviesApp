@@ -79,7 +79,6 @@ const withMovieDetails = WrappedComponent =>
 
     getKeywords() {
       const { currentMovie } = this.state;
-
       if (currentMovie.id) {
         axios
           .get(`${API_END_POINT}movie/${currentMovie.id}/keywords?api_key=${API_KEY}`)

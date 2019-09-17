@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Drawer, Col, Row, Divider, Typography } from "antd";
+import { Drawer, Col, Row, Divider, Typography, Empty } from "antd";
 const { Title } = Typography;
 
 const DrawerProfile = ({ visible, onClose, person }) => {
@@ -29,7 +29,9 @@ const DrawerProfile = ({ visible, onClose, person }) => {
       <Drawer width={640} placement='right' closable={false} onClose={onClose} visible={visible}>
         <Row>
           <Col span={24}>
-            <img src={`http://image.tmdb.org/t/p/w500${person.profile_path}`} alt={person.name} />
+            {person.profile_path && (
+              <img src={`http://image.tmdb.org/t/p/w500${person.profile_path}`} alt={person.name} />
+            )}
             <Divider />
             <Title className='movies-title' style={{ paddingTop: 5 }}>
               {person.name}
@@ -37,6 +39,11 @@ const DrawerProfile = ({ visible, onClose, person }) => {
           </Col>
         </Row>
         <Row>
+          {!person.profile_path &&
+            !person.birthday &&
+            !person.deathday &&
+            !person.place_of_birth &&
+            !person.biography && <Empty />}
           {person.birthday && (
             <Col span={12}>
               <DescriptionItem title='Birthday' content={person.birthday} />

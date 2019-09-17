@@ -1,5 +1,6 @@
 import React, { Fragment } from "react";
 import { Typography, Row, Col, Rate } from "antd";
+import noImage from "../img/noImage.jpg";
 import "./videoList.css";
 const { Title } = Typography;
 
@@ -13,7 +14,11 @@ const VideoList = ({ recoMovies, handleClickCurrent, computeStars }) => {
         <div key={`${item.name}-${item.poster_path}`}>
           <Row className='hoverableRow' onClick={() => handleClickCurrent(item)}>
             <Col span={5} style={{ marginRight: "15px" }}>
-              <img alt={item.title} src={`https://image.tmdb.org/t/p/w92${item.poster_path}`} />
+              {item.poster_path ? (
+                <img alt={item.title} src={`https://image.tmdb.org/t/p/w92${item.poster_path}`} />
+              ) : (
+                <img src={noImage} height='138' width='92' alt='no poster provided' />
+              )}
             </Col>
             <Col>
               <Title level={4}>
