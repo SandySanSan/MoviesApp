@@ -19,7 +19,10 @@ const withResultsList = WrappedComponent =>
       personresults: [],
       tvresults: [],
       text: this.props.match.params.searchText,
-      searchText: ""
+      searchText: "",
+      profileVisible: false,
+      person: [],
+      known_for: []
     };
 
     componentDidMount() {
@@ -129,8 +132,42 @@ const withResultsList = WrappedComponent =>
         });
     };
 
+    showDrawerProfile = () => {
+      this.setState({
+        profileVisible: true
+      });
+    };
+
+    onClose = () => {
+      this.setState({
+        visible: false,
+        profileVisible: false
+      });
+    };
+
+    getActorDetails = idPerson => {
+      if (idPerson) {
+        axios
+          .get(`${API_END_POINT}person/${idPerson}?api_key=${API_KEY}`)
+          .then(resp => this.setState({ person: resp.data }));
+        this.addKnownForPerson(idPerson);
+      }
+    };
+
+    addKnownForPerson = idPerson => {
+      const { personresults } = this.state;
+      const getPerson =
+        personresults.results && personresults.results.filter(person => idPerson === person.id);
+      this.setState(
+        {
+          known_for: getPerson[0].known_for
+        },
+        () => this.showDrawerProfile()
+      );
+    };
+
     render() {
-      const { searchresults, personresults, text, tvresults } = this.state;
+      const { searchresults, personresults, text, tvresults, person, known_for } = this.state;
 
       const gridStyle = {
         width: "16%",
@@ -191,27 +228,33 @@ const withResultsList = WrappedComponent =>
         personresults.results &&
         personresults.results.map(result => (
           <Card.Grid style={gridStyle} key={result.id}>
-            <Link to={`/movie-details/${result.id}`}>
-              <div>
-                {result.profile_path ? (
+            <div>
+              {result.profile_path ? (
+                <a onClick={() => this.getActorDetails(result.id)}>
                   <img
                     alt='logo'
                     src={`https://image.tmdb.org/t/p/w185${result.profile_path}`}
                     height='278px'
                     width='185px'
                   />
-                ) : (
-                  <img src={noImage} alt='Pas de miniature pour ce film' />
-                )}
-              </div>
-              <Paragraph ellipsis={{ rows: 1 }} style={{ paddingTop: "10px" }}>
-                {result.name}
-              </Paragraph>
-            </Link>
+                </a>
+              ) : (
+                <img src={noImage} alt='Pas de miniature pour ce film' />
+              )}
+            </div>
+            <Paragraph ellipsis={{ rows: 1 }} style={{ paddingTop: "10px" }}>
+              {result.name}
+            </Paragraph>
           </Card.Grid>
         ));
 
-      const { currentPage, currentPagePerson, currentPageTV, searchText } = this.state;
+      const {
+        currentPage,
+        currentPagePerson,
+        currentPageTV,
+        searchText,
+        profileVisible
+      } = this.state;
 
       return (
         <WrappedComponent
@@ -231,6 +274,10 @@ const withResultsList = WrappedComponent =>
           handleChangePageTV={this.handleChangePageTV}
           renderRedirect={this.renderRedirect}
           searchText={searchText}
+          profileVisible={profileVisible}
+          onClose={this.onClose}
+          person={person}
+          known_for={known_for}
         />
       );
     }

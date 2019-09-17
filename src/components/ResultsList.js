@@ -4,6 +4,7 @@ import HeaderSearchResults from "./HeaderSearchResults";
 import withResultsList from "../HOC/withResultsList";
 import { withRouter } from "react-router-dom";
 import { compose } from "recompose";
+import DrawerProfileSearch from "./DrawerProfileSearch";
 
 const { Content } = Layout;
 const { Search } = Input;
@@ -25,7 +26,10 @@ const ResultsList = ({
   tvresults,
   personresults,
   searchresults,
-  match
+  profileVisible,
+  onClose,
+  person,
+  known_for
 }) => {
   return (
     <Fragment>
@@ -36,6 +40,12 @@ const ResultsList = ({
             padding: 40,
             margin: 0
           }}>
+          <DrawerProfileSearch
+            profileVisible={profileVisible}
+            known_for={known_for}
+            onClose={onClose}
+            person={person}
+          />
           <Row gutter={16}>
             <Col span={16}>
               <Row style={{ width: "90vw" }}>
@@ -109,8 +119,6 @@ const ResultsList = ({
     </Fragment>
   );
 };
-// const WrappedComponent = withResultsList(ResultsList);
-// export default WrappedComponent;
 
 const WrappedComponent = compose(
   withRouter,
