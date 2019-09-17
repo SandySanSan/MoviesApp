@@ -1,5 +1,18 @@
 import React from "react";
-import { Typography, Row, Rate, Tabs, Icon, Table, Tag, Col, BackTop, Button, Divider } from "antd";
+import {
+  Typography,
+  Row,
+  Tooltip,
+  Tabs,
+  Icon,
+  Table,
+  Tag,
+  Col,
+  BackTop,
+  Button,
+  Divider,
+  Progress
+} from "antd";
 import "./videoList.css";
 import DrawerProfile from "./DrawerProfile";
 import DrawerReviews from "./DrawerReviews";
@@ -43,32 +56,41 @@ const VideoDetails = ({
           />
         )}
       </Row>
-      <Row>
-        <Col span={20}>
-          <Title level={1} style={{ paddingTop: "10px" }} className='movies-title'>
+
+      <Row type='flex' justify='space-start' align='middle'>
+        <Col span={18}>
+          <Title level={1} style={{ padding: "30px 0 10px 0" }} className='movies-title'>
             {currentMovie.title} (
             {currentMovie.release_date && currentMovie.release_date.slice(0, 4)})
           </Title>
         </Col>
-        <Col span={4}>
-          <div>
-            <Rate
-              disabled
-              allowHalf
-              value={currentMovie && computeStars(currentMovie.vote_average)}
-            />
-          </div>
+        <Col span={3}>
           <div>
             <h2>
-              <Icon type='like' /> {currentMovie.popularity}
+              <Tooltip title='Popularity' placement='bottom'>
+                <Icon type='like' /> {currentMovie.popularity}
+              </Tooltip>
             </h2>
           </div>
         </Col>
+        <Col span={3}>
+          <Tooltip title='Users score' placement='bottom'>
+            <Progress
+              type='circle'
+              percent={currentMovie.vote_average * 10}
+              width={65}
+              strokeColor='lime'
+              strokeWidth={20}
+              style={{ borderRadius: "50%" }}
+            />
+          </Tooltip>
+        </Col>
       </Row>
-      <h3 style={{ fontWeight: "bold" }}>
+
+      <h3 style={{ fontWeight: "bold", paddingTop: "20px" }}>
         Directed by {currentMovie.credits && directorName.map(director => `${director.name} `)}
       </h3>
-      <p style={{ padding: "20px 0 20px 0" }}>{currentMovie.overview}</p>
+      <p style={{ paddingBottom: "20px" }}>{currentMovie.overview}</p>
       {currentMovie.id && currentMovie.reviews && currentMovie.reviews.length !== 0 ? (
         <Button onClick={showDrawerReviews} icon='read' ghost>
           REVIEWS

@@ -23,7 +23,7 @@ const withApiMovie = WrappedComponent =>
         resp =>
           resp.data &&
           this.setState({
-            popularMovies: resp.data.results.slice(0, 5),
+            popularMovies: resp.data.results.slice(0, 6),
             currentMovie: resp.data.results[0],
             loading: false
           })
