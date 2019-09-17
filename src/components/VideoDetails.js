@@ -127,11 +127,10 @@ const VideoDetails = ({
         currentMovie={currentMovie}
         visible={reviewsVisible}
         onClose={onClose}
-        showDrawerReviews={showDrawerReviews}
         person={person}
       />
 
-      <DrawerProfile visible={visible} onClose={onClose} showDrawer={showDrawer} person={person} />
+      <DrawerProfile visible={visible} onClose={onClose} person={person} />
     </Row>
   );
 };

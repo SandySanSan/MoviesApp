@@ -3,7 +3,7 @@ import React from "react";
 import { Drawer, Col, Row, Divider, Typography } from "antd";
 const { Title } = Typography;
 
-const DrawerProfile = ({ visible, onClose, person }) => {
+const DrawerProfile = ({ profileVisible, onClose, person }) => {
   const DescriptionItem = ({ title, content }) => (
     <div
       style={{
@@ -26,7 +26,12 @@ const DrawerProfile = ({ visible, onClose, person }) => {
 
   return (
     <div>
-      <Drawer width={640} placement='right' closable={false} onClose={onClose} visible={visible}>
+      <Drawer
+        width={640}
+        placement='right'
+        closable={false}
+        onClose={onClose}
+        visible={profileVisible}>
         <Row>
           <Col span={24}>
             <img src={`http://image.tmdb.org/t/p/w500${person.profile_path}`} alt={person.name} />
