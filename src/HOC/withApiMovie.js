@@ -33,7 +33,7 @@ const withApiMovie = WrappedComponent =>
     initNowPlayingMovies() {
       axios
         .get(`${API_END_POINT}movie/now_playing?api_key=${API_KEY}&language=en-US`)
-        .then(resp => this.setState({ nowPlaying: resp.data.results.slice(0, 6) }));
+        .then(resp => this.setState({ nowPlaying: resp.data.results.slice(0, 8) }));
     }
 
     initTrendings() {

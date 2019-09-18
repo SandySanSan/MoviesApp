@@ -15,7 +15,7 @@ const PopularMovies = ({ popularMovies, loading }) => {
   }
 
   return (
-    <div style={{ paddingBottom: "40px" }}>
+    <div style={{ paddingBottom: "0px" }}>
       <Button
         onClick={() => next()}
         type='link'
@@ -51,7 +51,7 @@ const PopularMovies = ({ popularMovies, loading }) => {
                 <div className='movies-title'>{movie.title}</div>
                 <Paragraph ellipsis={{ rows: 3, expandable: false }}>{movie.overview}</Paragraph>
                 <Button>
-                  <a href={`/movie-details/${movie.id}`}>More details</a>
+                  <a href={`/movie-details/${movie.id}/movie`}>More details</a>
                 </Button>
               </div>
             </div>

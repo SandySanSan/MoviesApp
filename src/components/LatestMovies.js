@@ -1,28 +1,29 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Row, Card } from "antd";
+import { Row, Card, Col } from "antd";
 
-const gridStyle = {
-  width: "16.66%",
-  textAlign: "center"
-};
 const LatestMovies = ({ nowPlaying }) => (
-  <div style={{ background: "rgb(2, 21, 41,0)", padding: "20px 10px 20px 10px" }}>
+  <div style={{ background: "rgb(255, 255,255, 0.1)", padding: "20px" }}>
     <Row gutter={16}>
-      <Card style={{ backgroundColor: "rgb(2, 21, 41,0)", border: 0 }} bordered={false}>
-        <div className='tag-title'>
-          <h4 style={{ color: "white" }}>
-            <b>NOW PLAYING IN THEATERS</b>
-          </h4>
-        </div>
-        {nowPlaying.map(item => (
-          <Card.Grid style={gridStyle} key={item.poster_path}>
-            <Link to={`/movie-details/${item.id}`}>
-              <img src={`https://image.tmdb.org/t/p/w185${item.poster_path}`} alt={item.title} />
-            </Link>
-          </Card.Grid>
-        ))}
-      </Card>
+      <div className='tag-title'>
+        <h4 style={{ color: "white" }}>
+          <b>NOW PLAYING IN THEATERS</b>
+        </h4>
+      </div>
+      {nowPlaying.map(item => (
+        <Col xs={24} sm={8} md={6} lg={3} xl={3}>
+          <Link to={`/movie-details/${item.id}/movie`}>
+            <Card
+              hoverable
+              bordered={false}
+              style={{ backgroundColor: "rgb(255, 255,255, 0.0)" }}
+              size='small'
+              cover={
+                <img src={`https://image.tmdb.org/t/p/w185${item.poster_path}`} alt={item.title} />
+              }></Card>
+          </Link>
+        </Col>
+      ))}
     </Row>
   </div>
 );

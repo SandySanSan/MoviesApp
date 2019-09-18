@@ -5,6 +5,7 @@ import Header from "./Header";
 import { Layout, Row, Col } from "antd";
 import withMovieDetails from "../HOC/withMovieDetails";
 import VideoList from "./VideoList";
+import TvShowDetails from "./TvShowDetails";
 
 const { Content } = Layout;
 
@@ -25,7 +26,8 @@ const MoreDetails = ({
   showDrawerReviews,
   person,
   dataCrew,
-  columnsCrew
+  columnsCrew,
+  type
 }) => {
   return (
     <Layout>
@@ -47,28 +49,49 @@ const MoreDetails = ({
                   padding: 60,
                   boxShadow: "0px 10px 16px #021529"
                 }}>
-                <VideoDetails
-                  currentMovie={currentMovie}
-                  searchVideo={searchVideo}
-                  youtubeKey={youtubeKey}
-                  data={data}
-                  computeStars={computeStars}
-                  directorName={directorName}
-                  columns={columns}
-                  visible={visible}
-                  onClose={onClose}
-                  showDrawer={showDrawer}
-                  person={person}
-                  dataCrew={dataCrew}
-                  columnsCrew={columnsCrew}
-                  showDrawerReviews={showDrawerReviews}
-                  reviewsVisible={reviewsVisible}
-                />
+                {type === "movie" ? (
+                  <VideoDetails
+                    currentMovie={currentMovie}
+                    searchVideo={searchVideo}
+                    youtubeKey={youtubeKey}
+                    data={data}
+                    computeStars={computeStars}
+                    directorName={directorName}
+                    columns={columns}
+                    visible={visible}
+                    onClose={onClose}
+                    showDrawer={showDrawer}
+                    person={person}
+                    dataCrew={dataCrew}
+                    columnsCrew={columnsCrew}
+                    showDrawerReviews={showDrawerReviews}
+                    reviewsVisible={reviewsVisible}
+                  />
+                ) : (
+                  <TvShowDetails
+                    currentMovie={currentMovie}
+                    searchVideo={searchVideo}
+                    youtubeKey={youtubeKey}
+                    data={data}
+                    computeStars={computeStars}
+                    directorName={directorName}
+                    columns={columns}
+                    visible={visible}
+                    onClose={onClose}
+                    showDrawer={showDrawer}
+                    person={person}
+                    dataCrew={dataCrew}
+                    columnsCrew={columnsCrew}
+                    showDrawerReviews={showDrawerReviews}
+                    reviewsVisible={reviewsVisible}
+                  />
+                )}
               </Col>
               <Col span={8} offset={1} style={{ paddingTop: 40 }}>
                 <VideoList
                   computeStars={computeStars}
                   recoMovies={recoMovies}
+                  type={type}
                   handleClickCurrent={handleClickCurrent}
                 />
               </Col>

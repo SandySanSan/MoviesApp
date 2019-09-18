@@ -13,7 +13,8 @@ const withMovieDetails = WrappedComponent =>
       youtubeKey: "",
       visible: false,
       reviewsVisible: false,
-      person: []
+      person: [],
+      type: this.props.match.params.type
     };
 
     componentDidMount() {
@@ -22,17 +23,18 @@ const withMovieDetails = WrappedComponent =>
 
     getCurrentMovie() {
       const id = this.props.match.params.id;
+      const { type } = this.state;
       axios
-        .get(`${API_END_POINT}movie/${id}?api_key=${API_KEY}&language=en-US`)
+        .get(`${API_END_POINT}${type}/${id}?api_key=${API_KEY}&language=en-US`)
         .then(resp => this.setState({ currentMovie: resp.data }, () => this.getVideo()));
     }
 
     getVideo() {
-      const { currentMovie } = this.state;
+      const { currentMovie, type } = this.state;
       if (currentMovie.id) {
         axios
           .get(
-            `${API_END_POINT}movie/${currentMovie.id}?api_key=${API_KEY}&append_to_response=videos`
+            `${API_END_POINT}${type}/${currentMovie.id}?api_key=${API_KEY}&append_to_response=videos`
           )
           .then(
             resp =>
@@ -45,9 +47,9 @@ const withMovieDetails = WrappedComponent =>
     }
 
     setRecommendations = () => {
-      const { currentMovie } = this.state;
+      const { currentMovie, type } = this.state;
       axios
-        .get(`${API_END_POINT}movie/${currentMovie.id}/recommendations?api_key=${API_KEY}`)
+        .get(`${API_END_POINT}${type}/${currentMovie.id}/recommendations?api_key=${API_KEY}`)
         .then(resp =>
           this.setState(
             {
@@ -59,10 +61,10 @@ const withMovieDetails = WrappedComponent =>
     };
 
     getCredits() {
-      const { currentMovie } = this.state;
+      const { currentMovie, type } = this.state;
       if (currentMovie.id) {
         axios
-          .get(`${API_END_POINT}movie/${currentMovie.id}/credits?api_key=${API_KEY}`)
+          .get(`${API_END_POINT}${type}/${currentMovie.id}/credits?api_key=${API_KEY}`)
           .then(resp =>
             this.setState(
               {
@@ -122,7 +124,7 @@ const withMovieDetails = WrappedComponent =>
     };
 
     handleClickCurrent = movie => {
-      this.setState({ currentMovie: movie }, () => {
+      this.setState({ youtubeKey: "", currentMovie: movie }, () => {
         this.setRecommendations();
         this.getVideo();
       });
@@ -150,7 +152,15 @@ const withMovieDetails = WrappedComponent =>
     computeStars = average => Math.round(average / 2, 1);
 
     render() {
-      const { currentMovie, recoMovies, youtubeKey, visible, person, reviewsVisible } = this.state;
+      const {
+        currentMovie,
+        recoMovies,
+        youtubeKey,
+        visible,
+        person,
+        reviewsVisible,
+        type
+      } = this.state;
 
       const data =
         currentMovie.credits &&
@@ -261,6 +271,7 @@ const withMovieDetails = WrappedComponent =>
           person={person}
           dataCrew={dataCrew}
           columnsCrew={columnsCrew}
+          type={type}
         />
       );
     }

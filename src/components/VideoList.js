@@ -4,7 +4,7 @@ import noImage from "../img/noImage.jpg";
 import "./videoList.css";
 const { Title } = Typography;
 
-const VideoList = ({ recoMovies, handleClickCurrent, computeStars }) => {
+const VideoList = ({ recoMovies, handleClickCurrent, computeStars, type }) => {
   return (
     <Fragment>
       <Row style={{ backgroundColor: "rgba(122, 122, 122, 0.1)", padding: "10px" }}>
@@ -22,7 +22,9 @@ const VideoList = ({ recoMovies, handleClickCurrent, computeStars }) => {
             </Col>
             <Col>
               <Title level={4}>
-                {item.title} ({item.release_date.slice(0, 4)})
+                {type === "movie" ? item.title : item.name} (
+                {type === "movie" ? item.release_date.slice(0, 4) : item.first_air_date.slice(0, 4)}
+                )
               </Title>
               <Rate disabled allowHalf defaultValue={computeStars(item.vote_average)} />
             </Col>

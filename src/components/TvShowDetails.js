@@ -21,7 +21,7 @@ const { Title } = Typography;
 const { TabPane } = Tabs;
 const BASE_URL = "https://www.youtube.com/embed/";
 
-const VideoDetails = ({
+const TvShowDetails = ({
   currentMovie,
   youtubeKey,
   data,
@@ -50,7 +50,7 @@ const VideoDetails = ({
         ) : (
           <img
             src={`http://image.tmdb.org/t/p/w500${currentMovie.poster_path}`}
-            alt={currentMovie.title}
+            alt={currentMovie.name}
           />
         )}
       </Row>
@@ -58,8 +58,8 @@ const VideoDetails = ({
       <Row type='flex' justify='space-start' align='middle'>
         <Col span={18}>
           <Title level={1} style={{ padding: "30px 0 10px 0" }} className='movies-title'>
-            {currentMovie.title} (
-            {currentMovie.release_date && currentMovie.release_date.slice(0, 4)})
+            {currentMovie.name} (
+            {currentMovie.first_air_date && currentMovie.first_air_date.slice(0, 4)})
           </Title>
         </Col>
         <Col span={3}>
@@ -86,7 +86,8 @@ const VideoDetails = ({
       </Row>
 
       <h3 style={{ fontWeight: "bold", paddingTop: "20px" }}>
-        Directed by {currentMovie.credits && directorName.map(director => `${director.name} `)}
+        Created by{" "}
+        {currentMovie.created_by && currentMovie.created_by.map(director => `${director.name} `)}
       </h3>
       <p style={{ paddingBottom: "20px" }}>{currentMovie.overview}</p>
       {currentMovie.id && currentMovie.reviews && currentMovie.reviews.length !== 0 ? (
@@ -155,4 +156,4 @@ const VideoDetails = ({
   );
 };
 
-export default VideoDetails;
+export default TvShowDetails;

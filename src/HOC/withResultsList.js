@@ -180,7 +180,7 @@ const withResultsList = WrappedComponent =>
         searchresults.results &&
         resultsList.map(result => (
           <Card.Grid style={gridStyle} key={`${result.id}${result.poster_path}`}>
-            <Link to={`/movie-details/${result.id}`}>
+            <Link to={`/movie-details/${result.id}/movie`}>
               <div>
                 {result.poster_path ? (
                   <img
@@ -204,7 +204,7 @@ const withResultsList = WrappedComponent =>
         tvresults.results &&
         tvresults.results.map(result => (
           <Card.Grid style={gridStyle} key={result.id}>
-            <Link to={`/movie-details/${result.id}`}>
+            <Link to={`/movie-details/${result.id}/tv`}>
               <div>
                 {result.poster_path ? (
                   <img

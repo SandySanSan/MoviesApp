@@ -26,7 +26,9 @@ const Trendings = ({ trending, trendingPersons }) => {
           dataSource={data}
           renderItem={item => (
             <List.Item>
-              <List.Item.Meta title={<a href={`/movie-details/${item.id}`}>{item.title}</a>} />
+              <List.Item.Meta
+                title={<a href={`/movie-details/${item.id}/movie`}>{item.title}</a>}
+              />
               <div>
                 <h4>
                   <Icon type='like' /> {item.popularity}
