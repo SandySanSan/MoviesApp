@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { Card, Typography } from "antd";
-
+import { Card, Typography, Col } from "antd";
 import noImage from "../img/noImage.jpg";
 
 const API_KEY = process.env.REACT_APP_MOVIES_API_KEY;
 const API_END_POINT = "https://api.themoviedb.org/3/";
 const SEARCH_URL = "search/movie?";
+const { Meta } = Card;
 
 const withResultsList = WrappedComponent =>
   class HOC extends Component {
@@ -179,73 +179,106 @@ const withResultsList = WrappedComponent =>
       const moviesResults =
         searchresults.results &&
         resultsList.map(result => (
-          <Card.Grid style={gridStyle} key={`${result.id}${result.poster_path}`}>
+          <Col xs={24} sm={12} md={8} lg={8} xl={3} key={result.id}>
             <Link to={`/movie-details/${result.id}/movie`}>
-              <div>
-                {result.poster_path ? (
-                  <img
-                    alt='logo'
-                    src={`https://image.tmdb.org/t/p/w185${result.poster_path}`}
-                    height='278px'
-                    width='185px'
-                  />
-                ) : (
-                  <img src={noImage} alt='Pas de miniature pour ce film' />
-                )}
-              </div>
-              <Paragraph ellipsis={{ rows: 1 }} style={{ paddingTop: "10px" }}>
-                {result.title}
-              </Paragraph>
+              <Card
+                hoverable
+                bordered={false}
+                style={{ backgroundColor: "rgb(255, 255,255, 0.0)" }}
+                size='small'
+                cover={
+                  result.poster_path ? (
+                    <img
+                      alt='logo'
+                      src={`https://image.tmdb.org/t/p/w185${result.poster_path}`}
+                      width='185px'
+                      height='278px'
+                      style={{ objectFit: "contain" }}
+                    />
+                  ) : (
+                    <img
+                      src={noImage}
+                      alt='Pas de miniature pour ce film'
+                      width='185px'
+                      height='278px'
+                      style={{ objectFit: "contain" }}
+                    />
+                  )
+                }>
+                <Paragraph ellipsis={{ rows: 1 }}>{result.title}</Paragraph>
+              </Card>
             </Link>
-          </Card.Grid>
+          </Col>
         ));
 
       const tvResults =
         tvresults.results &&
         tvresults.results.map(result => (
-          <Card.Grid style={gridStyle} key={result.id}>
+          <Col xs={24} sm={12} md={8} lg={8} xl={3} key={result.id}>
             <Link to={`/movie-details/${result.id}/tv`}>
-              <div>
-                {result.poster_path ? (
-                  <img
-                    alt='logo'
-                    src={`https://image.tmdb.org/t/p/w185${result.poster_path}`}
-                    height='278px'
-                    width='185px'
-                  />
-                ) : (
-                  <img src={noImage} alt='Pas de miniature pour ce film' />
-                )}
-              </div>
-              <Paragraph ellipsis={{ rows: 1 }} style={{ paddingTop: "10px" }}>
-                {result.name}
-              </Paragraph>
+              <Card
+                hoverable
+                bordered={false}
+                style={{ backgroundColor: "rgb(255, 255,255, 0.0)" }}
+                size='small'
+                cover={
+                  result.poster_path ? (
+                    <img
+                      alt='logo'
+                      src={`https://image.tmdb.org/t/p/w185${result.poster_path}`}
+                      width='185px'
+                      height='278px'
+                      style={{ objectFit: "contain" }}
+                    />
+                  ) : (
+                    <img
+                      src={noImage}
+                      alt='Pas de miniature pour ce film'
+                      width='185px'
+                      height='278px'
+                      style={{ objectFit: "contain" }}
+                    />
+                  )
+                }>
+                <Paragraph ellipsis={{ rows: 1 }}>{result.name}</Paragraph>
+              </Card>
             </Link>
-          </Card.Grid>
+          </Col>
         ));
 
       const personsResults =
         personresults.results &&
         personresults.results.map(result => (
-          <Card.Grid style={gridStyle} key={result.id}>
-            <div>
-              {result.profile_path ? (
-                <a onClick={() => this.getActorDetails(result.id)}>
-                  <img
-                    alt='logo'
-                    src={`https://image.tmdb.org/t/p/w185${result.profile_path}`}
-                    height='278px'
-                    width='185px'
-                  />
-                </a>
-              ) : (
-                <img src={noImage} alt='Pas de miniature pour ce film' />
-              )}
-            </div>
-            <Paragraph ellipsis={{ rows: 1 }} style={{ paddingTop: "10px" }}>
-              {result.name}
-            </Paragraph>
-          </Card.Grid>
+          <Col xs={24} sm={12} md={8} lg={8} xl={3} key={result.id}>
+            <a onClick={() => this.getActorDetails(result.id)}>
+              <Card
+                hoverable
+                bordered={false}
+                style={{ backgroundColor: "rgb(255, 255,255, 0.0)" }}
+                size='small'
+                cover={
+                  result.profile_path ? (
+                    <img
+                      alt='logo'
+                      src={`https://image.tmdb.org/t/p/w185${result.profile_path}`}
+                      height='278px'
+                      width='185px'
+                      style={{ objectFit: "contain" }}
+                    />
+                  ) : (
+                    <img
+                      src={noImage}
+                      alt='Pas de miniature pour ce film'
+                      width='185px'
+                      height='278px'
+                      style={{ objectFit: "contain" }}
+                    />
+                  )
+                }>
+                <Paragraph ellipsis={{ rows: 1 }}>{result.name}</Paragraph>
+              </Card>
+            </a>
+          </Col>
         ));
 
       const {

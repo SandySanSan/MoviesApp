@@ -13,13 +13,13 @@ const Trendings = ({ trending, trendingPersons }) => {
   }));
 
   return (
-    <Row style={{ paddingTop: "40px", paddingBottom: "200px" }}>
+    <Row style={{ padding: "40px 20px 200px 20px", background: "rgb(255, 255,255, 0.1)" }}>
       <div className='tag-title'>
         <h4 style={{ color: "white" }}>
           <b>TRENDING OF THE DAY</b>
         </h4>
       </div>
-      <Col span={12} style={{ padding: "50px 50px 0 0" }}>
+      <Col md={12} sm={24} style={{ padding: "50px 40px 0 0" }}>
         <List
           itemLayout='horizontal'
           header={<div>MOVIES</div>}
@@ -38,7 +38,7 @@ const Trendings = ({ trending, trendingPersons }) => {
           )}
         />
       </Col>
-      <Col span={12} style={{ padding: "50px" }}>
+      <Col md={12} sm={24} style={{ padding: "50px 40px 0 0 " }}>
         <List
           itemLayout='horizontal'
           header={<div>PEOPLE</div>}

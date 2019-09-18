@@ -5,7 +5,6 @@ import withResultsList from "../HOC/withResultsList";
 import { withRouter } from "react-router-dom";
 import { compose } from "recompose";
 import DrawerProfileSearch from "./DrawerProfileSearch";
-
 const { Content } = Layout;
 const { Search } = Input;
 const { TabPane } = Tabs;
@@ -74,11 +73,13 @@ const ResultsList = ({
                         pageSize={20}
                         onChange={event => handleChangePage(event)}
                       />
-                      <Card
-                        title={`${moviesResults &&
-                          searchresults.total_results} movie(s) for "${text}"`}>
-                        {moviesResults}
-                      </Card>
+                      <Row gutter={16}>
+                        <Card
+                          title={`${moviesResults &&
+                            searchresults.total_results} movie(s) for "${text}"`}>
+                          {moviesResults}
+                        </Card>
+                      </Row>
                     </TabPane>
                     <TabPane tab='PEOPLE' key='2'>
                       <Pagination
@@ -88,11 +89,13 @@ const ResultsList = ({
                         pageSize={20}
                         onChange={event => handleChangePagePerson(event)}
                       />
-                      <Card
-                        title={`${personsResults &&
-                          personresults.total_results} person(s) for "${text}" `}>
-                        {personsResults}
-                      </Card>
+                      <Row gutter={16}>
+                        <Card
+                          title={`${personsResults &&
+                            personresults.total_results} person(s) for "${text}" `}>
+                          {personsResults}
+                        </Card>
+                      </Row>
                     </TabPane>
                     <TabPane tab='TV SHOWS' key='3' style={{ color: "white" }}>
                       <Pagination
@@ -102,11 +105,13 @@ const ResultsList = ({
                         pageSize={20}
                         onChange={event => handleChangePageTV(event)}
                       />
-                      <Card
-                        title={`${tvResults &&
-                          tvresults.total_results} TV Show(s) for "${text}"  `}>
-                        {tvResults}
-                      </Card>
+                      <Row gutter={16}>
+                        <Card
+                          title={`${tvResults &&
+                            tvresults.total_results} TV Show(s) for "${text}"  `}>
+                          {tvResults}
+                        </Card>
+                      </Row>
                     </TabPane>
                   </Tabs>
                 </Col>

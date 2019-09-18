@@ -15,7 +15,7 @@ const PopularMovies = ({ popularMovies, loading }) => {
   }
 
   return (
-    <div style={{ paddingBottom: "0px" }}>
+    <div style={{ paddingBottom: "20px" }}>
       <Button
         onClick={() => next()}
         type='link'

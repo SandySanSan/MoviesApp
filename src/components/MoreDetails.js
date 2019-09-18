@@ -40,9 +40,13 @@ const MoreDetails = ({
               margin: 0,
               paddingRight: 40
             }}>
-            <Row gutter={25}>
+            <Row gutter={0}>
               <Col
-                span={15}
+                xs={24}
+                sm={24}
+                md={24}
+                lg={15}
+                xl={15}
                 style={{
                   backgroundImage:
                     "linear-gradient(to bottom, #021529, #3e4557, #7a7d8a, #babac1, #fbfbfb)",
@@ -87,7 +91,7 @@ const MoreDetails = ({
                   />
                 )}
               </Col>
-              <Col span={8} offset={1} style={{ paddingTop: 40 }}>
+              <Col xs={18} sm={18} md={18} lg={8} xl={8} offset={1} style={{ paddingTop: 40 }}>
                 <VideoList
                   computeStars={computeStars}
                   recoMovies={recoMovies}

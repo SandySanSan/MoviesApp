@@ -16,7 +16,7 @@ const Home = ({ popularMovies, nowPlaying, loading, trending, trendingPersons })
       <Layout>
         <Content
           style={{
-            padding: "20px 40px 0 40px",
+            padding: "20px 40px 20px 40px",
             margin: 0,
             minHeight: 280
           }}>

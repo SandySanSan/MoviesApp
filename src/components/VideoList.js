@@ -15,12 +15,16 @@ const VideoList = ({ recoMovies, handleClickCurrent, computeStars, type }) => {
           <Row className='hoverableRow' onClick={() => handleClickCurrent(item)}>
             <Col span={5} style={{ marginRight: "15px" }}>
               {item.poster_path ? (
-                <img alt={item.title} src={`https://image.tmdb.org/t/p/w92${item.poster_path}`} />
+                <img
+                  alt={item.title}
+                  src={`https://image.tmdb.org/t/p/w92${item.poster_path}`}
+                  objectFit='cover'
+                />
               ) : (
                 <img src={noImage} height='138' width='92' alt='no poster provided' />
               )}
             </Col>
-            <Col>
+            <Col span={18}>
               <Title level={4}>
                 {type === "movie" ? item.title : item.name} (
                 {type === "movie" ? item.release_date.slice(0, 4) : item.first_air_date.slice(0, 4)}
