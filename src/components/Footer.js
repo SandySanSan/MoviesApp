@@ -7,7 +7,7 @@ import logoReact from "../img/logo-react.png";
 const { Text } = Typography;
 const FooterCredits = () => {
   return (
-    <Row>
+    <Row style={{ padding: "50px 0 50px 0" }}>
       <Col span={24}>
         <div style={{ textAlign: "center", paddingBottom: "20px" }}>
           <img

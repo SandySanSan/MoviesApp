@@ -11,3 +11,9 @@
 .avatar-img-round {
   border-radius: 25%;
 }
+
+.shadow-pane {
+  background-image: linear-gradient(to bottom, #021529, #3e4557, #7a7d8a, #babac1, #fbfbfb);
+  box-shadow: 0px 1px 20px #021529;
+  border-radius: 0 0 5px 0;
+}

@@ -1,6 +1,7 @@
 import React from "react";
 import {
   Typography,
+  Badge,
   Row,
   Tooltip,
   Tabs,
@@ -11,7 +12,8 @@ import {
   BackTop,
   Button,
   Divider,
-  Progress
+  Progress,
+  Spin
 } from "antd";
 import "./videoList.css";
 import DrawerProfile from "./DrawerProfile";
@@ -33,20 +35,24 @@ const VideoDetails = ({
   showDrawerReviews,
   person,
   dataCrew,
-  columnsCrew
+  columnsCrew,
+  loading,
+  toggleLoading
 }) => {
   return (
     <Row style={{ padding: "10px" }}>
       <BackTop />
       <Row>
         {currentMovie && youtubeKey !== "" ? (
-          <iframe
-            width='100%'
-            height='600px'
-            autoPlay={false}
-            title='video'
-            src={`${BASE_URL}${youtubeKey}`}
-          />
+          <Spin loading={loading}>
+            <iframe
+              width='100%'
+              height='600px'
+              autoPlay={false}
+              title='video'
+              src={`${BASE_URL}${youtubeKey}`}
+            />
+          </Spin>
         ) : (
           <img
             src={`http://image.tmdb.org/t/p/w500${currentMovie.poster_path}`}
@@ -84,15 +90,18 @@ const VideoDetails = ({
           </Tooltip>
         </Col>
       </Row>
-
-      <h3 style={{ fontWeight: "bold", paddingTop: "20px" }}>
-        Directed by {currentMovie.credits && directorName.map(director => `${director.name} `)}
-      </h3>
+      {directorName && (
+        <h3 style={{ fontWeight: "bold", paddingTop: "20px" }}>
+          Directed by {currentMovie.credits && directorName.map(director => `${director.name} `)}
+        </h3>
+      )}
       <p style={{ paddingBottom: "20px" }}>{currentMovie.overview}</p>
       {currentMovie.id && currentMovie.reviews && currentMovie.reviews.length !== 0 ? (
-        <Button onClick={showDrawerReviews} icon='read' ghost>
-          REVIEWS
-        </Button>
+        <Badge count={currentMovie.reviews.length}>
+          <Button onClick={showDrawerReviews} icon='read' ghost>
+            REVIEWS
+          </Button>
+        </Badge>
       ) : (
         ""
       )}

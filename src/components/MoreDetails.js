@@ -6,6 +6,8 @@ import { Layout, Row, Col } from "antd";
 import withMovieDetails from "../HOC/withMovieDetails";
 import VideoList from "./VideoList";
 import TvShowDetails from "./TvShowDetails";
+import Footer from "./Footer";
+import "./videoList.css";
 
 const { Content } = Layout;
 
@@ -27,7 +29,9 @@ const MoreDetails = ({
   person,
   dataCrew,
   columnsCrew,
-  type
+  type,
+  loading,
+  toggleLoading
 }) => {
   return (
     <Layout>
@@ -37,22 +41,17 @@ const MoreDetails = ({
           <Content
             style={{
               background: "#fff",
-              margin: 0,
-              paddingRight: 40
+              margin: 0
             }}>
             <Row gutter={0}>
               <Col
                 xs={24}
                 sm={24}
                 md={24}
-                lg={15}
-                xl={15}
-                style={{
-                  backgroundImage:
-                    "linear-gradient(to bottom, #021529, #3e4557, #7a7d8a, #babac1, #fbfbfb)",
-                  padding: 60,
-                  boxShadow: "0px 10px 16px #021529"
-                }}>
+                lg={16}
+                xl={16}
+                className='shadow-pane'
+                style={{ padding: "60px" }}>
                 {type === "movie" ? (
                   <VideoDetails
                     currentMovie={currentMovie}
@@ -70,6 +69,8 @@ const MoreDetails = ({
                     columnsCrew={columnsCrew}
                     showDrawerReviews={showDrawerReviews}
                     reviewsVisible={reviewsVisible}
+                    loading={loading}
+                    toggleLoading={toggleLoading}
                   />
                 ) : (
                   <TvShowDetails
@@ -91,7 +92,7 @@ const MoreDetails = ({
                   />
                 )}
               </Col>
-              <Col xs={18} sm={18} md={18} lg={8} xl={8} offset={1} style={{ paddingTop: 40 }}>
+              <Col xs={18} sm={18} md={18} lg={8} xl={8} style={{ padding: "40px 0 40px 40px" }}>
                 <VideoList
                   computeStars={computeStars}
                   recoMovies={recoMovies}
@@ -101,6 +102,7 @@ const MoreDetails = ({
               </Col>
             </Row>
           </Content>
+          <Footer />
         </Layout>
       </Layout>
     </Layout>

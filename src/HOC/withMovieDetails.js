@@ -14,7 +14,8 @@ const withMovieDetails = WrappedComponent =>
       visible: false,
       reviewsVisible: false,
       person: [],
-      type: this.props.match.params.type
+      type: this.props.match.params.type,
+      loading: true
     };
 
     componentDidMount() {
@@ -49,7 +50,7 @@ const withMovieDetails = WrappedComponent =>
     setRecommendations = () => {
       const { currentMovie, type } = this.state;
       axios
-        .get(`${API_END_POINT}${type}/${currentMovie.id}/recommendations?api_key=${API_KEY}`)
+        .get(`${API_END_POINT}${type}/${currentMovie.id}/similar?api_key=${API_KEY}`)
         .then(resp =>
           this.setState(
             {
@@ -99,10 +100,10 @@ const withMovieDetails = WrappedComponent =>
     }
 
     getReviews() {
-      const { currentMovie } = this.state;
+      const { currentMovie, type } = this.state;
       if (currentMovie.id) {
         axios
-          .get(`${API_END_POINT}movie/${currentMovie.id}/reviews?api_key=${API_KEY}`)
+          .get(`${API_END_POINT}${type}/${currentMovie.id}/reviews?api_key=${API_KEY}`)
           .then(resp =>
             this.setState({
               currentMovie: {
@@ -123,10 +124,15 @@ const withMovieDetails = WrappedComponent =>
       }
     };
 
-    handleClickCurrent = movie => {
-      this.setState({ youtubeKey: "", currentMovie: movie }, () => {
+    handleClickCurrent = (movie, type) => {
+      this.setState({ youtubeKey: "", currentMovie: movie, type: type }, () => {
         this.setRecommendations();
         this.getVideo();
+      });
+      let { history } = this.props;
+
+      history.push({
+        pathname: `/movie-details/${movie.id}/${type}`
       });
     };
 
@@ -149,6 +155,10 @@ const withMovieDetails = WrappedComponent =>
       });
     };
 
+    toggleLoading = () => {
+      this.setState({ loading: false });
+    };
+
     computeStars = average => Math.round(average / 2, 1);
 
     render() {
@@ -159,7 +169,8 @@ const withMovieDetails = WrappedComponent =>
         visible,
         person,
         reviewsVisible,
-        type
+        type,
+        loading
       } = this.state;
 
       const data =
@@ -272,6 +283,8 @@ const withMovieDetails = WrappedComponent =>
           dataCrew={dataCrew}
           columnsCrew={columnsCrew}
           type={type}
+          loading={loading}
+          toggleLoading={this.toggleLoading}
         />
       );
     }

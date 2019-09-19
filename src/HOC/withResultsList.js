@@ -7,7 +7,6 @@ import noImage from "../img/noImage.jpg";
 const API_KEY = process.env.REACT_APP_MOVIES_API_KEY;
 const API_END_POINT = "https://api.themoviedb.org/3/";
 const SEARCH_URL = "search/movie?";
-const { Meta } = Card;
 
 const withResultsList = WrappedComponent =>
   class HOC extends Component {
@@ -169,10 +168,6 @@ const withResultsList = WrappedComponent =>
     render() {
       const { searchresults, personresults, text, tvresults, person, known_for } = this.state;
 
-      const gridStyle = {
-        width: "16%",
-        textAlign: "center"
-      };
       const { Paragraph } = Typography;
       const resultsList = searchresults.results;
 

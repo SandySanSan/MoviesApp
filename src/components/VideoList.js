@@ -7,12 +7,10 @@ const { Title } = Typography;
 const VideoList = ({ recoMovies, handleClickCurrent, computeStars, type }) => {
   return (
     <Fragment>
-      <Row style={{ backgroundColor: "rgba(122, 122, 122, 0.1)", padding: "10px" }}>
-        RECOMMENDATIONS
-      </Row>
+      <Row style={{ backgroundColor: "rgba(122, 122, 122, 0.1)", padding: "10px" }}>SIMILAR</Row>
       {recoMovies.map(item => (
-        <div key={`${item.name}-${item.poster_path}`}>
-          <Row className='hoverableRow' onClick={() => handleClickCurrent(item)}>
+        <div key={item.id}>
+          <Row className='hoverableRow' onClick={() => handleClickCurrent(item, type)}>
             <Col span={5} style={{ marginRight: "15px" }}>
               {item.poster_path ? (
                 <img
